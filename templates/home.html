@@ -1,160 +1,409 @@
+{% load static %}
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-```
-<title>CafeHub | Fresh Coffee & Delicious Food</title>
-
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-```
-
+    <title>CafeHub | Modern Coffee, Cozy Vibes</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+<body id="top">
+    <div class="page-shell">
+        <header class="navbar" role="banner">
+            <a href="#top" class="brand-logo">☕ CafeHub</a>
+            <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" data-nav-toggle>
+                <span class="hamburger"></span>
+            </button>
+            <nav class="nav-menu desktop-nav" aria-label="Primary navigation">
+                <a class="nav-link" href="#home">Home</a>
+                <a class="nav-link" href="#menu">Menu</a>
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#gallery">Gallery</a>
+                <a class="nav-link" href="#contact">Contact</a>
+                <a class="nav-link nav-link--button" href="/login/">Login</a>
+            </nav>
+        </header>
 
-<body>
-
-```
-<!-- Navbar -->
-<nav class="navbar">
-
-    <div class="logo">
-        ☕ CafeHub
-    </div>
-
-    <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="#menu">Menu</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a href="/login/">Login</a>
-    </div>
-
-</nav>
-
-
-<!-- Hero Section -->
-<section class="hero">
-
-    <div class="hero-content">
-
-        <p class="small-title">WELCOME TO CAFEHUB</p>
-
-        <h1>
-            Fresh Coffee.<br>
-            Delicious Moments.
-        </h1>
-
-        <p>
-            Enjoy freshly brewed coffee, delicious food
-            and a comfortable place to relax with friends
-            and family.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="#menu" class="btn">View Menu</a>
-            <a href="#about" class="btn secondary">About Us</a>
+        <div class="mobile-nav" data-mobile-nav>
+            <nav class="mobile-menu" aria-label="Mobile navigation">
+                <a class="nav-link" href="#home">Home</a>
+                <a class="nav-link" href="#menu">Menu</a>
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#gallery">Gallery</a>
+                <a class="nav-link" href="#contact">Contact</a>
+                <a class="nav-link nav-link--button" href="/login/">Login</a>
+            </nav>
         </div>
 
+        <main>
+            <section id="home" class="hero animate-on-scroll">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <span class="hero-label">WELCOME TO CAFEHUB</span>
+                    <h1>Modern Coffee.<br>Cozy Vibes.<br>Unforgettable Moments.</h1>
+                    <p>Discover signature brews, handcrafted bites, and a warm atmosphere made for relaxing with friends.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#menu">View Menu</a>
+                        <a class="btn btn-secondary" href="#contact">Book a Table</a>
+                    </div>
+                    <div class="hero-trust">
+                        <span>☕ Freshly Brewed</span>
+                        <span>🥐 Fresh Ingredients</span>
+                        <span>⭐ 4.9 Customer Rating</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="special-offer animate-on-scroll">
+                <div>
+                    <p class="section-small">TODAY'S SPECIAL</p>
+                    <h2>20% OFF</h2>
+                    <p>On selected coffee & desserts.</p>
+                </div>
+                <a class="btn btn-primary" href="#menu">Order Now</a>
+            </section>
+
+            <section id="menu" class="section menu-section animate-on-scroll">
+                <div class="section-heading">
+                    <p class="section-small">Our Menu</p>
+                    <h2>Popular items</h2>
+                    <p>Browse fan-favorite drinks and meals carefully selected for a modern cafe experience.</p>
+                </div>
+                <div class="menu-filters" role="tablist" aria-label="Menu categories">
+                    <button class="filter-button filter-button--active" type="button" data-filter="all">All</button>
+                    <button class="filter-button" type="button" data-filter="coffee">Coffee</button>
+                    <button class="filter-button" type="button" data-filter="breakfast">Breakfast</button>
+                    <button class="filter-button" type="button" data-filter="burgers">Burgers</button>
+                    <button class="filter-button" type="button" data-filter="pizza">Pizza</button>
+                    <button class="filter-button" type="button" data-filter="desserts">Desserts</button>
+                </div>
+                <div class="menu-grid">
+                    <article class="menu-card animate-on-scroll" data-category="coffee">
+                        <img src="{% static 'images/cappuccino.svg' %}" alt="Cappuccino" loading="lazy">
+                        <div class="menu-card__body">
+                            <span class="menu-card__tag">Coffee</span>
+                            <h3 class="menu-card__title">Cappuccino</h3>
+                            <p class="menu-card__text">Velvety espresso topped with silky steamed milk and latte art.</p>
+                        </div>
+                        <div class="menu-card__footer">
+                            <span class="menu-card__price">₹120</span>
+                            <div class="menu-card__meta">
+                                <span>4.8</span>
+                                <button class="btn add-to-cart" type="button">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="menu-card animate-on-scroll" data-category="burgers">
+                        <img src="{% static 'images/burger.svg' %}" alt="Classic Burger" loading="lazy">
+                        <div class="menu-card__body">
+                            <span class="menu-card__tag">Burgers</span>
+                            <h3 class="menu-card__title">Classic Burger</h3>
+                            <p class="menu-card__text">Juicy house-blend patty with crisp greens and creamy sauce.</p>
+                        </div>
+                        <div class="menu-card__footer">
+                            <span class="menu-card__price">₹150</span>
+                            <div class="menu-card__meta">
+                                <span>4.7</span>
+                                <button class="btn add-to-cart" type="button">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="menu-card animate-on-scroll" data-category="pizza">
+                        <img src="{% static 'images/pizza.svg' %}" alt="Cheese Pizza" loading="lazy">
+                        <div class="menu-card__body">
+                            <span class="menu-card__tag">Pizza</span>
+                            <h3 class="menu-card__title">Cheese Pizza</h3>
+                            <p class="menu-card__text">Wood-fired crust layered with melted cheese and fresh herbs.</p>
+                        </div>
+                        <div class="menu-card__footer">
+                            <span class="menu-card__price">₹200</span>
+                            <div class="menu-card__meta">
+                                <span>4.9</span>
+                                <button class="btn add-to-cart" type="button">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="menu-card animate-on-scroll" data-category="desserts">
+                        <img src="{% static 'images/cake.svg' %}" alt="Chocolate Cake" loading="lazy">
+                        <div class="menu-card__body">
+                            <span class="menu-card__tag">Desserts</span>
+                            <h3 class="menu-card__title">Chocolate Cake</h3>
+                            <p class="menu-card__text">Rich, moist cake with a creamy frosting finish.</p>
+                        </div>
+                        <div class="menu-card__footer">
+                            <span class="menu-card__price">₹100</span>
+                            <div class="menu-card__meta">
+                                <span>4.9</span>
+                                <button class="btn add-to-cart" type="button">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="menu-card animate-on-scroll" data-category="breakfast">
+                        <img src="{% static 'images/croissant.svg' %}" alt="Croissant" loading="lazy">
+                        <div class="menu-card__body">
+                            <span class="menu-card__tag">Breakfast</span>
+                            <h3 class="menu-card__title">Almond Croissant</h3>
+                            <p class="menu-card__text">Flaky pastry filled with almond cream and dusted with sugar.</p>
+                        </div>
+                        <div class="menu-card__footer">
+                            <span class="menu-card__price">₹140</span>
+                            <div class="menu-card__meta">
+                                <span>4.8</span>
+                                <button class="btn add-to-cart" type="button">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="menu-card animate-on-scroll" data-category="coffee">
+                        <img src="{% static 'images/barista.svg' %}" alt="Espresso" loading="lazy">
+                        <div class="menu-card__body">
+                            <span class="menu-card__tag">Coffee</span>
+                            <h3 class="menu-card__title">Espresso Shot</h3>
+                            <p class="menu-card__text">Bold and aromatic espresso for a premium coffee boost.</p>
+                        </div>
+                        <div class="menu-card__footer">
+                            <span class="menu-card__price">₹80</span>
+                            <div class="menu-card__meta">
+                                <span>4.9</span>
+                                <button class="btn add-to-cart" type="button">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="menu-card animate-on-scroll" data-category="burgers">
+                        <img src="{% static 'images/interior.svg' %}" alt="Grilled Sandwich" loading="lazy">
+                        <div class="menu-card__body">
+                            <span class="menu-card__tag">Burgers</span>
+                            <h3 class="menu-card__title">Grilled Sandwich</h3>
+                            <p class="menu-card__text">Golden bread stuffed with melted cheese and fresh vegetables.</p>
+                        </div>
+                        <div class="menu-card__footer">
+                            <span class="menu-card__price">₹130</span>
+                            <div class="menu-card__meta">
+                                <span>4.6</span>
+                                <button class="btn add-to-cart" type="button">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="menu-card animate-on-scroll" data-category="pizza">
+                        <img src="{% static 'images/gallery-1.svg' %}" alt="Veggie Pizza" loading="lazy">
+                        <div class="menu-card__body">
+                            <span class="menu-card__tag">Pizza</span>
+                            <h3 class="menu-card__title">Veggie Pizza</h3>
+                            <p class="menu-card__text">Crisp vegetables and melted cheese on a perfectly baked crust.</p>
+                        </div>
+                        <div class="menu-card__footer">
+                            <span class="menu-card__price">₹180</span>
+                            <div class="menu-card__meta">
+                                <span>4.7</span>
+                                <button class="btn add-to-cart" type="button">Add to Cart</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="about" class="section about-section animate-on-scroll">
+                <div class="about-image-wrap">
+                    <img src="{% static 'images/interior.svg' %}" alt="Cafe interior" loading="lazy">
+                </div>
+                <div class="about-content">
+                    <p class="section-small">ABOUT US</p>
+                    <h2>More Than Just Coffee</h2>
+                    <p>At CafeHub, we craft every drink and dish with care. Relax in a warm setting while enjoying premium ingredients and friendly service.</p>
+                    <ul class="about-features">
+                        <li>✓ Premium Ingredients</li>
+                        <li>✓ Freshly Prepared</li>
+                        <li>✓ Friendly Service</li>
+                    </ul>
+                    <a class="btn btn-primary" href="#gallery">Learn More</a>
+                </div>
+            </section>
+
+            <section class="section why-section animate-on-scroll">
+                <div class="section-heading">
+                    <p class="section-small">WHY CHOOSE CAFEHUB?</p>
+                    <h2>Designed for premium coffee lovers</h2>
+                </div>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">☕</div>
+                        <h3>Premium Coffee</h3>
+                        <p>Freshly roasted and carefully brewed to perfection.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">🥐</div>
+                        <h3>Fresh Food</h3>
+                        <p>Prepared daily with quality ingredients and bold flavors.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">🌿</div>
+                        <h3>Cozy Atmosphere</h3>
+                        <p>A relaxing place for friends, work, and quiet moments.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">❤️</div>
+                        <h3>Friendly Service</h3>
+                        <p>We care about every customer from the first sip.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="gallery" class="section gallery-section animate-on-scroll">
+                <div class="section-heading">
+                    <p class="section-small">OUR GALLERY</p>
+                    <h2>Moments worth sharing</h2>
+                </div>
+                <div class="gallery-grid">
+                    <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-1.svg' %}" data-caption="Freshly brewed coffee">
+                        <img src="{% static 'images/gallery-1.svg' %}" alt="Gallery coffee" loading="lazy">
+                    </button>
+                    <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-2.svg' %}" data-caption="Cafe interior seating">
+                        <img src="{% static 'images/gallery-2.svg' %}" alt="Gallery cafe interior" loading="lazy">
+                    </button>
+                    <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-3.svg' %}" data-caption="Sweet desserts">
+                        <img src="{% static 'images/gallery-3.svg' %}" alt="Gallery dessert" loading="lazy">
+                    </button>
+                    <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-4.svg' %}" data-caption="Burger and sides">
+                        <img src="{% static 'images/gallery-4.svg' %}" alt="Gallery burger" loading="lazy">
+                    </button>
+                    <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-5.svg' %}" data-caption="Pizza selection">
+                        <img src="{% static 'images/gallery-5.svg' %}" alt="Gallery pizza" loading="lazy">
+                    </button>
+                    <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-6.svg' %}" data-caption="Experienced barista">
+                        <img src="{% static 'images/gallery-6.svg' %}" alt="Gallery barista" loading="lazy">
+                    </button>
+                </div>
+            </section>
+
+            <section class="section testimonials-section animate-on-scroll">
+                <div class="section-heading">
+                    <p class="section-small">WHAT OUR CUSTOMERS SAY</p>
+                    <h2>Customer reviews</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <article class="testimonial-card">
+                        <p>"Best coffee in town. The atmosphere is amazing and the staff is very friendly."</p>
+                        <div>
+                            <span>— Rahul</span>
+                            <span class="testimonial-rating">★★★★☆</span>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>"Beautiful place to relax and enjoy a great burger and coffee."</p>
+                        <div>
+                            <span>— Priya</span>
+                            <span class="testimonial-rating">★★★★★</span>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>"Excellent food, peaceful atmosphere and great service."</p>
+                        <div>
+                            <span>— Arjun</span>
+                            <span class="testimonial-rating">★★★★☆</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section cta-section animate-on-scroll">
+                <div>
+                    <p class="section-small">READY FOR YOUR NEXT COFFEE?</p>
+                    <h2>Come visit CafeHub and enjoy fresh coffee, delicious food and unforgettable moments.</h2>
+                </div>
+                <div class="cta-actions">
+                    <a class="btn btn-primary" href="#menu">View Menu</a>
+                    <a class="btn btn-secondary" href="#contact">Contact Us</a>
+                </div>
+            </section>
+
+            <section id="contact" class="section contact-section animate-on-scroll">
+                <div class="section-heading">
+                    <p class="section-small">GET IN TOUCH</p>
+                    <h2>Visit Our Cafe</h2>
+                </div>
+                <div class="contact-layout">
+                    <div class="contact-info">
+                        <p>📍 Hospet, Karnataka</p>
+                        <p>📞 +91 98765 43210</p>
+                        <p><a href="mailto:cafehub@gmail.com">cafehub@gmail.com</a></p>
+                        <div class="map-placeholder" aria-label="Map placeholder">
+                            <span>Map placeholder</span>
+                        </div>
+                    </div>
+                    <form id="contact-form" class="contact-form" method="post" action="">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input id="name" name="name" type="text" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" placeholder="Your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input id="phone" name="phone" type="tel" placeholder="Your phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4" placeholder="How can we help?" required></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Send Message</button>
+                        <p class="form-feedback" data-form-feedback aria-live="polite"></p>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-grid">
+                <div>
+                    <a href="#top" class="brand-logo footer-logo">☕ CafeHub</a>
+                    <p>Fresh coffee • delicious food • memorable moments</p>
+                </div>
+                <div>
+                    <h3>Quick Links</h3>
+                    <nav class="footer-links" aria-label="Footer quick links">
+                        <a href="#home">Home</a>
+                        <a href="#menu">Menu</a>
+                        <a href="#about">About</a>
+                        <a href="#gallery">Gallery</a>
+                        <a href="#contact">Contact</a>
+                    </nav>
+                </div>
+                <div>
+                    <h3>Customer</h3>
+                    <nav class="footer-links" aria-label="Footer customer links">
+                        <a href="/login/">Login</a>
+                        <a href="#contact">Register</a>
+                        <a href="#contact">My Orders</a>
+                    </nav>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <p>Hospet, Karnataka</p>
+                    <p>+91 98765 43210</p>
+                    <p><a href="mailto:cafehub@gmail.com">cafehub@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 CafeHub. All rights reserved.</p>
+                <div class="social-links" aria-label="Social media links">
+                    <a href="#" aria-label="Instagram">Instagram</a>
+                    <a href="#" aria-label="Facebook">Facebook</a>
+                    <a href="#" aria-label="Twitter">Twitter</a>
+                </div>
+            </div>
+        </footer>
     </div>
 
-</section>
-
-
-<!-- Popular Menu -->
-<section id="menu" class="menu-section">
-
-    <p class="section-small">OUR MENU</p>
-
-    <h2>Popular Items</h2>
-
-    <div class="menu-container">
-
-        <div class="food-card">
-            <div class="food-icon">☕</div>
-            <h3>Cappuccino</h3>
-            <p>Rich and creamy freshly brewed coffee.</p>
-            <h4>₹120</h4>
-            <button>Add to Cart</button>
+    <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Gallery lightbox">
+        <div class="lightbox__content">
+            <button class="lightbox__close" type="button" aria-label="Close image"></button>
+            <img class="lightbox__image" data-lightbox-image alt="Gallery image">
+            <p class="lightbox__caption" data-lightbox-caption></p>
         </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍔</div>
-            <h3>Classic Burger</h3>
-            <p>Juicy burger with fresh vegetables.</p>
-            <h4>₹150</h4>
-            <button>Add to Cart</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍕</div>
-            <h3>Cheese Pizza</h3>
-            <p>Hot pizza loaded with delicious cheese.</p>
-            <h4>₹200</h4>
-            <button>Add to Cart</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍰</div>
-            <h3>Chocolate Cake</h3>
-            <p>Soft and delicious chocolate cake.</p>
-            <h4>₹100</h4>
-            <button>Add to Cart</button>
-        </div>
-
     </div>
 
-</section>
-
-
-<!-- About -->
-<section id="about" class="about-section">
-
-    <div>
-        <p class="section-small">ABOUT US</p>
-
-        <h2>More Than Just Coffee</h2>
-
-        <p>
-            CafeHub is a cozy café where great coffee,
-            delicious food and good people come together.
-            Our goal is to give every customer a wonderful
-            experience.
-        </p>
-
-        <a href="#contact" class="btn">Contact Us</a>
-    </div>
-
-</section>
-
-
-<!-- Contact -->
-<section id="contact" class="contact-section">
-
-    <p class="section-small">GET IN TOUCH</p>
-
-    <h2>Visit Our Cafe</h2>
-
-    <p>📍 Hospet, Karnataka</p>
-    <p>📞 +91 98765 43210</p>
-    <p>📧 cafehub@gmail.com</p>
-
-</section>
-
-
-<!-- Footer -->
-<footer>
-
-    <h3>☕ CafeHub</h3>
-
-    <p>Fresh Coffee • Delicious Food • Great Moments</p>
-
-    <p>© 2026 CafeHub. All Rights Reserved.</p>
-
-</footer>
-```
-
+    <script src="{% static 'js/main.js' %}" defer></script>
 </body>
 </html>

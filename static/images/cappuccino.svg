@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="cupGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e8d8c8" />
+      <stop offset="100%" stop-color="#c08b5c" />
+    </linearGradient>
+  </defs>
+  <rect width="300" height="240" rx="32" fill="#f8f1e7" />
+  <path d="M70 150 C70 110 86 82 150 82 C214 82 230 110 230 150 Z" fill="url(#cupGrad)" />
+  <path d="M80 150 H220 C228 150 234 156 234 164 V178 C234 186 228 192 220 192 H80 C72 192 66 186 66 178 V164 C66 156 72 150 80 150 Z" fill="#6f4e37" />
+  <path d="M107 132 C112 120 128 118 136 132" stroke="#fff6e6" stroke-width="10" fill="none" stroke-linecap="round" />
+  <path d="M136 132 C145 118 160 118 166 132" stroke="#fff6e6" stroke-width="10" fill="none" stroke-linecap="round" />
+</svg>
