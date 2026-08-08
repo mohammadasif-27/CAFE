@@ -1,54 +1,218 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}My Cart — CafeHub{% endblock %}
 
 {% block content %}
-  <section class="section cart-section animate-on-scroll">
-    <div class="section-heading">
-      <p class="section-small">Your Cart</p>
-      <h2>Order Summary</h2>
-      <p>Review your selected items before checkout.</p>
-    </div>
 
-    {% if cart_items %}
-      <div class="cart-grid">
+<div class="cart-page">
+
+```
+<div class="cart-header">
+    <h1>🛒 My Cart</h1>
+    <p>Review your selected items before placing your order.</p>
+</div>
+
+{% if cart_items %}
+
+    <div class="cart-grid">
+
+        <!-- CART ITEMS -->
         <div class="cart-list">
-          {% for item in cart_items %}
-            <article class="cart-item">
-              <div class="cart-item__image">
-                {% if item.food.image %}
-                  <img src="{% static item.food.image %}" alt="{{ item.food.name }}" loading="lazy">
-                {% else %}
-                  <div class="cart-item__placeholder">{{ item.food.name|slice:":1" }}</div>
-                {% endif %}
-              </div>
-              <div class="cart-item__details">
-                <h3>{{ item.food.name }}</h3>
-                <p>{{ item.food.description }}</p>
-                <div class="cart-item__meta">
-                  <span>Price: ₹{{ item.food.price }}</span>
-                  <span>Qty: {{ item.quantity }}</span>
-                  <span>Subtotal: ₹{{ item.subtotal }}</span>
-                </div>
-              </div>
-            </article>
-          {% endfor %}
+
+            {% for item in cart_items %}
+
+                <article class="cart-item">
+
+                    <!-- Food Image -->
+                    <div class="cart-item__image">
+
+                        {% if item.food.image %}
+
+                            <img
+                                src="{% static item.food.image %}"
+                                alt="{{ item.food.name }}"
+                                loading="lazy"
+                            >
+
+                        {% else %}
+
+                            <div class="cart-item__placeholder">
+                                {{ item.food.name|slice:":1" }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Food Details -->
+                    <div class="cart-item__details">
+
+                        <h3>{{ item.food.name }}</h3>
+
+                        {% if item.food.description %}
+                            <p>{{ item.food.description }}</p>
+                        {% endif %}
+
+
+                        <div class="cart-item__meta">
+
+                            <span>
+                                Price:
+                                ₹{{ item.food.price }}
+                            </span>
+
+                            <span>
+                                Quantity:
+                                {{ item.quantity }}
+                            </span>
+
+                            <span>
+                                Subtotal:
+                                ₹{{ item.subtotal }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- Cart Actions -->
+                        <div class="cart-item__actions">
+
+                            <form
+                                method="post"
+                                action="{% url 'orders:update_cart_item' item.id %}"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    class="btn btn-secondary"
+                                    type="submit"
+                                    name="action"
+                                    value="decrement"
+                                    {% if item.quantity <= 1 %}disabled{% endif %}
+                                >
+                                    −
+                                </button>
+
+
+                                <span class="quantity">
+                                    {{ item.quantity }}
+                                </span>
+
+
+                                <button
+                                    class="btn btn-secondary"
+                                    type="submit"
+                                    name="action"
+                                    value="increment"
+                                >
+                                    +
+                                </button>
+
+
+                                <button
+                                    class="btn btn-danger"
+                                    type="submit"
+                                    name="action"
+                                    value="remove"
+                                >
+                                    Remove
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
         </div>
 
+
+        <!-- ORDER SUMMARY -->
         <aside class="cart-summary">
-          <div class="summary-card">
-            <h3>Cart total</h3>
-            <p class="summary-total">₹{{ total }}</p>
-            <p>{{ cart_items.count }} item{{ cart_items.count|pluralize }}</p>
-            <a class="btn btn-primary" href="#contact">Proceed to Checkout</a>
-          </div>
+
+            <div class="summary-card">
+
+                <h2>Order Summary</h2>
+
+                <div class="summary-row">
+                    <span>Items</span>
+                    <span>{{ cart_items.count }}</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>₹{{ total }}</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <span>₹40</span>
+                </div>
+
+                <hr>
+
+                <div class="summary-row summary-total">
+                    <strong>Total</strong>
+                    <strong>₹{{ total|add:"40" }}</strong>
+                </div>
+
+
+                <a
+                    class="btn btn-primary checkout-btn"
+                    href="{% url 'orders:checkout' %}"
+                >
+                    Proceed to Checkout →
+                </a>
+
+
+                <a
+                    class="continue-shopping"
+                    href="{% url 'home' %}#menu"
+                >
+                    ← Continue Shopping
+                </a>
+
+            </div>
+
         </aside>
-      </div>
-    {% else %}
-      <div class="empty-cart">
-        <p>Your cart is empty. Browse the menu to add your favorites.</p>
-        <a class="btn btn-primary" href="{% url 'home' %}#menu">View Menu</a>
-      </div>
-    {% endif %}
-  </section>
+
+    </div>
+
+{% else %}
+
+    <!-- EMPTY CART -->
+
+    <div class="empty-cart">
+
+        <div class="empty-cart-icon">
+            🛒
+        </div>
+
+        <h2>Your Cart is Empty</h2>
+
+        <p>
+            Looks like you haven't added anything to your cart yet.
+        </p>
+
+        <a
+            class="btn btn-primary"
+            href="{% url 'home' %}#menu"
+        >
+            Browse Menu
+        </a>
+
+    </div>
+
+{% endif %}
+```
+
+</div>
+
 {% endblock %}

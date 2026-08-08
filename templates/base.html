@@ -21,9 +21,9 @@
           <a class="nav-link" href="#gallery">Gallery</a>
           <a class="nav-link" href="#contact">Contact</a>
           {% if user.is_authenticated %}
-            <a class="nav-link" href="{% url 'orders:cart' %}">Cart ({{ user.cart_items.count }})</a>
+            <a class="nav-link" href="{% url 'orders:cart' %}">🛒 Cart ({{ cart_quantity }})</a>
             <a class="nav-link" href="{% url 'accounts:profile' %}">My Profile</a>
-            <a class="nav-link" href="{% url 'orders:cart' %}">My Orders</a>
+            <a class="nav-link" href="{% url 'orders:my_orders' %}">My Orders</a>
             <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
             <span style="margin-left:6px;color:var(--muted);">{% if user.first_name %}Welcome, {{ user.first_name }}{% else %}Welcome{% endif %}</span>
           {% else %}
@@ -41,9 +41,9 @@
           <a class="nav-link" href="#gallery">Gallery</a>
           <a class="nav-link" href="#contact">Contact</a>
           {% if user.is_authenticated %}
-            <a class="nav-link" href="{% url 'orders:cart' %}">Cart ({{ user.cart_items.count }})</a>
+            <a class="nav-link" href="{% url 'orders:cart' %}">🛒 Cart ({{ cart_quantity }})</a>
+            <a class="nav-link" href="{% url 'orders:my_orders' %}">My Orders</a>
             <a class="nav-link" href="{% url 'accounts:profile' %}">My Profile</a>
-            <a class="nav-link" href="{% url 'orders:cart' %}">My Orders</a>
             <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
           {% else %}
             <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>

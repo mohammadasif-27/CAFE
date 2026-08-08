@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Success — CafeHub{% endblock %}
+
+{% block content %}
+  <section class="section order-success-section animate-on-scroll">
+    <div class="section-heading">
+      <p class="section-small">Order Confirmed</p>
+      <h2>Thank you for your order!</h2>
+      <p>Your order <strong>{{ order.order_number }}</strong> has been placed successfully.</p>
+    </div>
+
+    <div class="order-success-card">
+      <p>Order total: <strong>₹{{ order.total }}</strong></p>
+      <p>Status: <strong>{{ order.get_status_display }}</strong></p>
+      <a class="btn btn-secondary" href="{% url 'orders:my_orders' %}">My Orders</a>
+      <a class="btn btn-primary" href="{% url 'home' %}#menu">Continue Shopping</a>
+    </div>
+  </section>
+{% endblock %}

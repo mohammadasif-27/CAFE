@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout — CafeHub{% endblock %}
+
+{% block content %}
+  <section class="section checkout-section animate-on-scroll">
+    <div class="section-heading">
+      <p class="section-small">Checkout</p>
+      <h2>Complete your order</h2>
+      <p>Review your items and enter delivery details.</p>
+    </div>
+
+    <div class="checkout-grid">
+      <div class="checkout-summary">
+        <h3>Order summary</h3>
+        <div class="checkout-items">
+          {% for item in cart_items %}
+            <div class="checkout-item">
+              <div>
+                <strong>{{ item.food.name }}</strong>
+                <div>Qty: {{ item.quantity }}</div>
+              </div>
+              <div>
+                <div>₹{{ item.food.price }}</div>
+                <div>₹{{ item.subtotal }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="checkout-totals">
+          <div>Subtotal: ₹{{ subtotal }}</div>
+          <div>Delivery Fee: ₹{{ delivery_fee }}</div>
+          <div class="checkout-total">Total: ₹{{ total }}</div>
+        </div>
+      </div>
+
+      <div class="checkout-form-card">
+        <h3>Delivery details</h3>
+        <form method="post" action="{% url 'orders:place_order' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input id="city" name="city" type="text" required>
+            </div>
+            <div class="form-group">
+              <label for="pincode">Pincode</label>
+              <input id="pincode" name="pincode" type="text" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Payment method</label>
+            <div class="payment-method">Cash on Delivery</div>
+          </div>
+          <button class="btn btn-primary" type="submit">Place Order</button>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

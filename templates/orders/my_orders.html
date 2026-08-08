@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}My Orders — CafeHub{% endblock %}
+
+{% block content %}
+  <section class="section my-orders-section animate-on-scroll">
+    <div class="section-heading">
+      <p class="section-small">My Orders</p>
+      <h2>Order history</h2>
+      <p>View your recent orders and track their status.</p>
+    </div>
+
+    {% if orders %}
+      <div class="orders-grid">
+        {% for order in orders %}
+          <article class="order-card">
+            <h3>{{ order.order_number }}</h3>
+            <p>Total: ₹{{ order.total }}</p>
+            <p>Status: {{ order.get_status_display }}</p>
+            <p>Placed: {{ order.created_at|date:'M d, Y' }}</p>
+            <a class="btn btn-secondary" href="{% url 'orders:order_success' order.order_number %}">View Order</a>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-orders">
+        <p>You have not placed any orders yet.</p>
+        <a class="btn btn-primary" href="{% url 'home' %}#menu">Browse Menu</a>
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}
