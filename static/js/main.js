@@ -174,4 +174,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Password visibility toggle used on auth forms
+  const passwordToggles = document.querySelectorAll('.password-toggle');
+  passwordToggles.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const parent = btn.closest('div') || btn.parentElement;
+      const input = parent.querySelector('input[type="password"], input[type="text"]');
+      if (!input) return;
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = 'Hide';
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        input.type = 'password';
+        btn.textContent = 'Show';
+        btn.setAttribute('aria-pressed', 'false');
+      }
+    });
+  });
 });

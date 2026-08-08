@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}My Cart — CafeHub{% endblock %}
+
+{% block content %}
+  <section class="section cart-section animate-on-scroll">
+    <div class="section-heading">
+      <p class="section-small">Your Cart</p>
+      <h2>Order Summary</h2>
+      <p>Review your selected items before checkout.</p>
+    </div>
+
+    {% if cart_items %}
+      <div class="cart-grid">
+        <div class="cart-list">
+          {% for item in cart_items %}
+            <article class="cart-item">
+              <div class="cart-item__image">
+                {% if item.food.image %}
+                  <img src="{% static item.food.image %}" alt="{{ item.food.name }}" loading="lazy">
+                {% else %}
+                  <div class="cart-item__placeholder">{{ item.food.name|slice:":1" }}</div>
+                {% endif %}
+              </div>
+              <div class="cart-item__details">
+                <h3>{{ item.food.name }}</h3>
+                <p>{{ item.food.description }}</p>
+                <div class="cart-item__meta">
+                  <span>Price: ₹{{ item.food.price }}</span>
+                  <span>Qty: {{ item.quantity }}</span>
+                  <span>Subtotal: ₹{{ item.subtotal }}</span>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+
+        <aside class="cart-summary">
+          <div class="summary-card">
+            <h3>Cart total</h3>
+            <p class="summary-total">₹{{ total }}</p>
+            <p>{{ cart_items.count }} item{{ cart_items.count|pluralize }}</p>
+            <a class="btn btn-primary" href="#contact">Proceed to Checkout</a>
+          </div>
+        </aside>
+      </div>
+    {% else %}
+      <div class="empty-cart">
+        <p>Your cart is empty. Browse the menu to add your favorites.</p>
+        <a class="btn btn-primary" href="{% url 'home' %}#menu">View Menu</a>
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}

@@ -1,0 +1,183 @@
+{% load static %}
+
+<section class="special-offer animate-on-scroll">
+    <div>
+        <p class="section-small">TODAY'S SPECIAL</p>
+        <h2>20% OFF</h2>
+        <p>On selected coffee & desserts.</p>
+    </div>
+    <a class="btn btn-primary" href="#menu">Order Now</a>
+</section>
+
+<section id="menu" class="section menu-section animate-on-scroll">
+    <div class="section-heading">
+        <p class="section-small">Our Menu</p>
+        <h2>Popular items</h2>
+        <p>Browse fan-favorite drinks and meals carefully selected for a modern cafe experience.</p>
+    </div>
+    <div class="menu-filters" role="tablist" aria-label="Menu categories">
+        <button class="filter-button filter-button--active" type="button" data-filter="all">All</button>
+        <button class="filter-button" type="button" data-filter="coffee">Coffee</button>
+        <button class="filter-button" type="button" data-filter="breakfast">Breakfast</button>
+        <button class="filter-button" type="button" data-filter="burgers">Burgers</button>
+        <button class="filter-button" type="button" data-filter="pizza">Pizza</button>
+        <button class="filter-button" type="button" data-filter="desserts">Desserts</button>
+    </div>
+    <div class="menu-grid">
+        <!-- menu cards (same as before) -->
+        {% comment %} Menu cards are defined in the main template previously; kept concise here. {% endcomment %}
+        {% include 'menu_cards_partial.html' %}
+    </div>
+</section>
+
+<section id="about" class="section about-section animate-on-scroll">
+    <div class="about-image-wrap">
+        <img src="{% static 'images/interior.svg' %}" alt="Cafe interior" loading="lazy">
+    </div>
+    <div class="about-content">
+        <p class="section-small">ABOUT US</p>
+        <h2>More Than Just Coffee</h2>
+        <p>At CafeHub, we craft every drink and dish with care. Relax in a warm setting while enjoying premium ingredients and friendly service.</p>
+        <ul class="about-features">
+            <li>✓ Premium Ingredients</li>
+            <li>✓ Freshly Prepared</li>
+            <li>✓ Friendly Service</li>
+        </ul>
+        <a class="btn btn-primary" href="#gallery">Learn More</a>
+    </div>
+</section>
+
+<section class="section why-section animate-on-scroll">
+    <div class="section-heading">
+        <p class="section-small">WHY CHOOSE CAFEHUB?</p>
+        <h2>Designed for premium coffee lovers</h2>
+    </div>
+    <div class="features-grid">
+        <article class="feature-card">
+            <div class="feature-icon">☕</div>
+            <h3>Premium Coffee</h3>
+            <p>Freshly roasted and carefully brewed to perfection.</p>
+        </article>
+        <article class="feature-card">
+            <div class="feature-icon">🥐</div>
+            <h3>Fresh Food</h3>
+            <p>Prepared daily with quality ingredients and bold flavors.</p>
+        </article>
+        <article class="feature-card">
+            <div class="feature-icon">🌿</div>
+            <h3>Cozy Atmosphere</h3>
+            <p>A relaxing place for friends, work, and quiet moments.</p>
+        </article>
+        <article class="feature-card">
+            <div class="feature-icon">❤️</div>
+            <h3>Friendly Service</h3>
+            <p>We care about every customer from the first sip.</p>
+        </article>
+    </div>
+</section>
+
+<section id="gallery" class="section gallery-section animate-on-scroll">
+    <div class="section-heading">
+        <p class="section-small">OUR GALLERY</p>
+        <h2>Moments worth sharing</h2>
+    </div>
+    <div class="gallery-grid">
+        <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-1.svg' %}" data-caption="Freshly brewed coffee">
+            <img src="{% static 'images/gallery-1.svg' %}" alt="Gallery coffee" loading="lazy">
+        </button>
+        <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-2.svg' %}" data-caption="Cafe interior seating">
+            <img src="{% static 'images/gallery-2.svg' %}" alt="Gallery cafe interior" loading="lazy">
+        </button>
+        <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-3.svg' %}" data-caption="Sweet desserts">
+            <img src="{% static 'images/gallery-3.svg' %}" alt="Gallery dessert" loading="lazy">
+        </button>
+        <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-4.svg' %}" data-caption="Burger and sides">
+            <img src="{% static 'images/gallery-4.svg' %}" alt="Gallery burger" loading="lazy">
+        </button>
+        <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-5.svg' %}" data-caption="Pizza selection">
+            <img src="{% static 'images/gallery-5.svg' %}" alt="Gallery pizza" loading="lazy">
+        </button>
+        <button class="gallery-card" type="button" data-gallery-item data-image="{% static 'images/gallery-6.svg' %}" data-caption="Experienced barista">
+            <img src="{% static 'images/gallery-6.svg' %}" alt="Gallery barista" loading="lazy">
+        </button>
+    </div>
+</section>
+
+<section class="section testimonials-section animate-on-scroll">
+    <div class="section-heading">
+        <p class="section-small">WHAT OUR CUSTOMERS SAY</p>
+        <h2>Customer reviews</h2>
+    </div>
+    <div class="testimonials-grid">
+        <article class="testimonial-card">
+            <p>"Best coffee in town. The atmosphere is amazing and the staff is very friendly."</p>
+            <div>
+                <span>— Rahul</span>
+                <span class="testimonial-rating">★★★★☆</span>
+            </div>
+        </article>
+        <article class="testimonial-card">
+            <p>"Beautiful place to relax and enjoy a great burger and coffee."</p>
+            <div>
+                <span>— Priya</span>
+                <span class="testimonial-rating">★★★★★</span>
+            </div>
+        </article>
+        <article class="testimonial-card">
+            <p>"Excellent food, peaceful atmosphere and great service."</p>
+            <div>
+                <span>— Arjun</span>
+                <span class="testimonial-rating">★★★★☆</span>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="section cta-section animate-on-scroll">
+    <div>
+        <p class="section-small">READY FOR YOUR NEXT COFFEE?</p>
+        <h2>Come visit CafeHub and enjoy fresh coffee, delicious food and unforgettable moments.</h2>
+    </div>
+    <div class="cta-actions">
+        <a class="btn btn-primary" href="#menu">View Menu</a>
+        <a class="btn btn-secondary" href="#contact">Contact Us</a>
+    </div>
+</section>
+
+<section id="contact" class="section contact-section animate-on-scroll">
+    <div class="section-heading">
+        <p class="section-small">GET IN TOUCH</p>
+        <h2>Visit Our Cafe</h2>
+    </div>
+    <div class="contact-layout">
+        <div class="contact-info">
+            <p>📍 Hospet, Karnataka</p>
+            <p>📞 +91 98765 43210</p>
+            <p><a href="mailto:cafehub@gmail.com">cafehub@gmail.com</a></p>
+            <div class="map-placeholder" aria-label="Map placeholder">
+                <span>Map placeholder</span>
+            </div>
+        </div>
+        <form id="contact-form" class="contact-form" method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="Your email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" placeholder="Your phone" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" placeholder="How can we help?" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <p class="form-feedback" data-form-feedback aria-live="polite"></p>
+        </form>
+    </div>
+</section>

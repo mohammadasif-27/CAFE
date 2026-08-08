@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Register — CafeHub{% endblock %}
+
+{% block content %}
+<section class="section" style="padding:6rem 2rem;">
+  <div style="max-width:720px;margin:0 auto;">
+    <div class="auth-card">
+      <h2>Create Your Account</h2>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-grid">
+          <div class="form-group">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
+            {{ form.first_name.errors }}
+          </div>
+          <div class="form-group">
+            {{ form.last_name.label_tag }}
+            {{ form.last_name }}
+            {{ form.last_name.errors }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.username.label_tag }}
+          {{ form.username }}
+          {{ form.username.errors }}
+        </div>
+        <div class="form-group">
+          {{ form.email.label_tag }}
+          {{ form.email }}
+          {{ form.email.errors }}
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            {{ form.password1.label_tag }}
+            <div style="position:relative;">
+              {{ form.password1 }}
+              <button type="button" class="password-toggle" aria-label="Toggle password visibility">Show</button>
+            </div>
+            {{ form.password1.errors }}
+          </div>
+          <div class="form-group">
+            {{ form.password2.label_tag }}
+            <div style="position:relative;">
+              {{ form.password2 }}
+              <button type="button" class="password-toggle" aria-label="Toggle password visibility">Show</button>
+            </div>
+            {{ form.password2.errors }}
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:center;margin-top:1rem;">
+          <button class="btn btn-primary" type="submit">Create Account</button>
+          <a href="{% url 'accounts:login' %}" class="btn btn-secondary">Already have an account? Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,5 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+from menu.models import Food
+
+
 def home(request):
-    return render(request, "home.html")
+    foods = Food.objects.filter(available=True)
+    return render(request, "home.html", {"foods": foods})

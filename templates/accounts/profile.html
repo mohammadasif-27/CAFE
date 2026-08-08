@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Profile — CafeHub{% endblock %}
+
+{% block content %}
+<section class="section" style="padding:4rem 2rem;">
+  <div style="max-width:820px;margin:0 auto;">
+    <div class="profile-card">
+      <h2>Your Profile</h2>
+      <div class="profile-grid">
+        <div>
+          <p><strong>Username:</strong> {{ user.username }}</p>
+          <p><strong>Full name:</strong> {{ user.get_full_name }}</p>
+          <p><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+        <div>
+          <p><a class="btn btn-primary" href="#">Edit Profile</a></p>
+          <p><a class="btn btn-secondary" href="{% url 'accounts:logout' %}">Logout</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
