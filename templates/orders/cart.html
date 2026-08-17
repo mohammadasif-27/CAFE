@@ -7,7 +7,6 @@
 
 <div class="cart-page">
 
-```
 <div class="cart-header">
     <h1>🛒 My Cart</h1>
     <p>Review your selected items before placing your order.</p>
@@ -37,9 +36,11 @@
 
                         {% else %}
 
-                            <div class="cart-item__placeholder">
-                                {{ item.food.name|slice:":1" }}
-                            </div>
+                            <img
+                                src="{% static 'images/default-food.jpg' %}"
+                                alt="{{ item.food.name }}"
+                                loading="lazy"
+                            >
 
                         {% endif %}
 

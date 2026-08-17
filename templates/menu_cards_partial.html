@@ -7,7 +7,7 @@
         {% if food.image %}
           <img src="{% static food.image %}" alt="{{ food.name }}" loading="lazy">
         {% else %}
-          <div class="menu-card__placeholder">{{ food.name|slice:":1" }}</div>
+          <img src="{% static 'images/default-food.jpg' %}" alt="{{ food.name }}" loading="lazy">
         {% endif %}
       </div>
       <div class="menu-card__body">

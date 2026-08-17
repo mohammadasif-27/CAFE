@@ -3,9 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.urls import reverse
 
-from .forms import RegisterForm
+from .forms import RegisterForm, ProfileUpdateForm
 
 
 def register_view(request):
@@ -71,4 +70,30 @@ def logout_view(request):
 
 @login_required
 def profile_view(request):
-	return render(request, 'accounts/profile.html')
+	orders_count = request.user.orders.count()
+	completed_orders = request.user.orders.filter(status='completed').count()
+	pending_orders = request.user.orders.filter(status='pending').count()
+	recent_orders = request.user.orders.order_by('-created_at')[:5]
+
+	return render(request, 'accounts/profile.html', {
+		'orders_count': orders_count,
+		'completed_orders': completed_orders,
+		'pending_orders': pending_orders,
+		'recent_orders': recent_orders,
+	})
+
+
+@login_required
+def edit_profile_view(request):
+	if request.method == 'POST':
+		form = ProfileUpdateForm(request.POST, instance=request.user, user=request.user)
+		if form.is_valid():
+			form.save()
+			messages.success(request, 'Profile updated successfully.')
+			return redirect('accounts:profile')
+		else:
+			messages.error(request, 'Please correct the details below.')
+	else:
+		form = ProfileUpdateForm(instance=request.user, user=request.user)
+
+	return render(request, 'accounts/edit_profile.html', {'form': form})

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Checkout — CafeHub{% endblock %}
 
@@ -16,6 +17,13 @@
         <div class="checkout-items">
           {% for item in cart_items %}
             <div class="checkout-item">
+              <div class="checkout-item__image">
+                {% if item.food.image %}
+                  <img src="{% static item.food.image %}" alt="{{ item.food.name }}" loading="lazy">
+                {% else %}
+                  <img src="{% static 'images/default-food.jpg' %}" alt="{{ item.food.name }}" loading="lazy">
+                {% endif %}
+              </div>
               <div>
                 <strong>{{ item.food.name }}</strong>
                 <div>Qty: {{ item.quantity }}</div>
