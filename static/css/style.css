@@ -36,7 +36,7 @@ img,
 picture,
 svg {
     display: block;
-    max-width: 10%;
+    max-width: 100%;
 }
 
 a {
@@ -682,7 +682,7 @@ button {
 }
 
 .cta-section .btn-primary {
-    background: #fff;
+    background: #5786cd;
     color: #2b1b14;
 }
 
