@@ -254,7 +254,7 @@ button {
 
 .btn-primary {
     background: linear-gradient(135deg, var(--accent), #f8f1e7);
-    color: #2b1b14;
+    color: #f1edec;
     border: none;
 }
 
@@ -262,6 +262,7 @@ button {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.16);
     color: var(--text);
+    border: radius 24px;
 }
 
 .hero-trust {
@@ -675,35 +676,29 @@ button {
     max-width: 42rem;
 }
 
-.cta-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+.cta-actions .btn-primary {
+    background:transparent !important;
+    border:solid 1px #101010 !important;;
+    border-radius: 18px !important;
+    color: white !important;
+}
+.cta-actions .btn-primary:hover {
+    background-color: #c08b5c !important;
+    border-color: #c08b5c !important;
 }
 
-.cta-section .btn-primary {
-    /* background: #cac7da; */
-    color: #101010;
-    border-radius: 24px;
+.cta-actions .btn-secondary {
+    background:transparent!important;
+    border:solid 1px #101010 !important;;
+    border-radius: 18px !important;
+    color: white !important;
 }
-.cta-section .btn-primary:hover {
-    background-color: #fff;
-    color: #000;
-    border-color: #000;
+.cta-actions .btn-secondary:hover {
+    background-color: #c08b5c !important;
+    border-color: #c08b5c !important;
 }
 
-.cta-section .btn-secondary {
-    background: black;
-    color: whitesmoke;
-    /* border-color: rgba(255, 255, 255, 0.2); */
-    border-style: dotted;
-    border-radius: 24px;
-}
-.cta-section .btn-secondary:hover {
-    background-color: whitesmoke;
-    color: #000;
-    border-color: #000;
-}
+
 /* CONTACT */
 .contact-layout {
     display: grid;
