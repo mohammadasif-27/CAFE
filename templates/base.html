@@ -25,7 +25,7 @@
             <a class="nav-link" href="{% url 'accounts:profile' %}">My Profile</a>
             <a class="nav-link" href="{% url 'orders:my_orders' %}">My Orders</a>
             <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
-            <span style="margin-left:6px;color:var(--muted);">{% if user.first_name %}Welcome, {{ user.first_name }}{% else %}Welcome{% endif %}</span>
+            <span style="margin-left:6px;color:rgb(28, 28, 131);">{% if user.first_name %}Welcome, {{ user.first_name }}{% else %}Welcome{% endif %}</span>
           {% else %}
             <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
             <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
