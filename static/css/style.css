@@ -254,27 +254,27 @@ button {
 }
 .btn-primary {
     background: transparent !important;
-     border: 2px dotted rgba(255, 255, 255, 0.5) !important;
-    color: #f1edec !important;
+    border: 2px dotted rgba(255, 255, 255, 0.5) !important;
+    color: whitesmoke;
     border-radius: 24px;
 }
 
 .btn-primary:hover {
-    background-color: #c08b5c !important;
-    border-color: #c08b5c !important;
-    color: #fff !important;
+    background-color: #150a01 !important;
+    border-color: #0b0601 !important;
+    color: #eee9e9 !important;
 }
 
 .btn-secondary {
     background-color: transparent !important;
-    border: 2px dotted rgba(255, 255, 255, 0.5) !important;
-    color: #f1edec !important;
+    border: 2px dotted rgba(255, 255, 255, 0.5) !important;    
     border-radius: 24px;
+    color: whitesmoke;
 }
 
 .btn-secondary:hover {
-    background-color: #c08b5c !important;
-    color: #fff !important;
+    background-color: #100801 !important;
+    color: #f1f0f0 !important;
 }
 
 .hero-trust {
