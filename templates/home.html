@@ -25,32 +25,7 @@
             Discover signature brews, handcrafted bites,
             and a warm atmosphere made for relaxing with friends.
         </p>
-
-        <div class="hero-actions">
-
-            <a class="btn btn-primary" href="#menu">
-                View Menu
-            </a>
-
-            {% if user.is_authenticated %}
-
-                <a class="btn btn-secondary"
-                   href="{% url 'orders:cart' %}">
-                    Order Now
-                </a>
-
-            {% else %}
-
-                <a class="btn btn-secondary"
-                   href="{% url 'accounts:login' %}">
-                    Order Now
-                </a>
-
-            {% endif %}
-
-        </div>
-
-        <div class="hero-trust">
+         <div class="hero-trust">
 
             <span>☕ Freshly Brewed</span>
             <span>🥐 Fresh Ingredients</span>

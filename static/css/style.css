@@ -253,31 +253,37 @@ button {
     margin-bottom: 2rem;
 }
 .btn-primary {
-    background: transparent !important;
-    border: 2px dotted rgba(255, 255, 255, 0.5) !important;
+    background-color:  #0c075b !important;
+    border: 2px dotted rgba(15, 14, 14, 0.5) !important;
     color: whitesmoke;
     border-radius: 24px;
+    font-size : 10px;
+    width : 120px;
+    height : 50px;
+
 }
 
 .btn-primary:hover {
-    background-color: #150a01 !important;
+     background-color:  rgb(1, 22, 8) !important;
     border-color: #0b0601 !important;
     color: #eee9e9 !important;
 }
 
 .btn-secondary {
-    size: 4px;
-    background-color: #7A1F2B;
-    border: 2px rgba(255, 255, 255, 0.5) !important;    
-    border-radius: 24px;
-    color: whitesmoke!important;
+    background-color: #27357b !important;
+    color: whitesmoke !important;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 18px;
+    font-size: 15px;      /* Makes the text larger */
+    padding: 12px 24px; 
+     width: 180px;
+     /* Makes the button larger */
 }
 
 .btn-secondary:hover {
     background-color: #100801 !important;
     color: #f1f0f0 !important;
 }
-
 .hero-trust {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -657,10 +663,11 @@ button {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 24px 40px rgba(0, 0, 0, 0.08);
+    color: black;
 }
 
 .testimonial-card p {
-    color: var(--muted);
+    color: #2E5E4E;
     margin-bottom: 1.4rem;
 }
 
@@ -730,7 +737,7 @@ button {
 
 .contact-info p,
 .contact-info a {
-    color: var(--muted);
+    color: #2E5E4E;
 }
 
 .map-placeholder {
@@ -743,6 +750,7 @@ button {
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.12em;
+    color: #2E5E4E;
 }
 
 .contact-form {
@@ -798,7 +806,7 @@ button {
 /* FOOTER */
 .footer {
     padding: 4rem 2rem 2rem;
-    background: #c08b5c;
+    background: #213397;
     color: #101010;
 }
 
@@ -1031,4 +1039,10 @@ footer h3 {
     .contact-section {
         padding: 3.5rem 1.25rem;
     }
+}
+/* cart-images */
+.cart-item__image{
+    width : 150px;
+    display : block;
+
 }
