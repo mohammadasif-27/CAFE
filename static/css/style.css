@@ -253,14 +253,17 @@ button {
     margin-bottom: 2rem;
 }
 .btn-primary {
+     display: inline-block;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    justify-content: center; /* Horizontal center */
+    align-items: center;    
     background-color:  #0c075b !important;
     border: 2px dotted rgba(15, 14, 14, 0.5) !important;
     color: whitesmoke;
     border-radius: 24px;
     font-size : 10px;
-    width : 120px;
-    height : 50px;
-
 }
 
 .btn-primary:hover {
@@ -1081,4 +1084,23 @@ footer h3 {
 }
 .order-success-item__details{
     margin-bottom: 20px;
+}
+.shopping{
+    background-color: #1eb180 !important;
+    width: 10px;
+    height: auto;
+}
+.order-card{
+     margin-bottom: 20px;
+     margin-top: 20px;
+}
+.view order{
+    margin-bottom: 20px;
+    background-color: #0c075b !important;
+    color: white !important;
+    border: none;
+    padding: 12px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+
 }

@@ -18,7 +18,7 @@
             <p>Total: ₹{{ order.total }}</p>
             <p>Status: {{ order.get_status_display }}</p>
             <p>Placed: {{ order.created_at|date:'M d, Y' }}</p>
-            <a class="btn btn-secondary" href="{% url 'orders:order_success' order.order_number %}">View Order</a>
+            <a class="btn btn-primary" href="{% url 'orders:order_success' order.order_number %}">View Order</a>
           </article>
         {% endfor %}
       </div>
