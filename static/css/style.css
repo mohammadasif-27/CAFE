@@ -1046,3 +1046,24 @@ footer h3 {
     display : block;
 
 }
+.btn-danger {
+    background-color: #ff4d4d !important;
+    color: white !important;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.summary-total{
+    margin-bottom: 20px;
+
+}
+.checkout-btn{
+    margin-top: 40px;
+    background-color: #0c075b !important;
+    color: white !important;
+    border: none;
+    padding: 12px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
