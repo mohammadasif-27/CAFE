@@ -815,6 +815,7 @@ button {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 2rem;
     margin-bottom: 2rem;
+    color: whitesmoke;
 }
 
 .footer h3 {
@@ -1066,4 +1067,15 @@ footer h3 {
     padding: 12px 12px;
     border-radius: 8px;
     cursor: pointer;
+}
+/* checkout */
+.checkout-item__image{
+    width: 100px;
+    height: 100px;
+}
+/* order-success-item__image */
+.order-success-item__image{
+    width: 200px;
+    height: 200px;
+
 }
