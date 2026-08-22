@@ -1104,3 +1104,15 @@ footer h3 {
     cursor: pointer;
 
 }
+/* profil */
+.profile{
+    margin-bottom: 20pxs;
+    margin-top: 20px;
+}
+
+.table-responsive{
+    margin-bottom:20px;
+}
+.tbody{
+    margin-bottom: 20px;
+}

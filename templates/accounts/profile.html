@@ -90,7 +90,7 @@
             </thead>
             <tbody>
               {% for order in recent_orders %}
-                <tr>
+                <tr class="profile">
                   <td>{{ order.order_number }}</td>
                   <td>{{ order.created_at|date:'d M Y' }}</td>
                   <td>₹{{ order.total }}</td>
