@@ -1105,14 +1105,15 @@ footer h3 {
 
 }
 /* profil */
-.profile{
-    margin-bottom: 20pxs;
-    margin-top: 20px;
+.profile td {
+    background:transparent;
+    padding: 16px;
 }
-
-.table-responsive{
-    margin-bottom:20px;
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
-.tbody{
-    margin-bottom: 20px;
+.btn-primary a{
+    padding: 20px;
 }
