@@ -1117,3 +1117,9 @@ footer h3 {
 .btn-primary a{
     padding: 20px;
 }
+/* show */
+.password-toggle {
+    background-color: #0b0601;
+    color: white;
+    border-radius: 30%;
+}
