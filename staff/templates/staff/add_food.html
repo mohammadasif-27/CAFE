@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Add Food{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/staff.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="food-container">
+
+    <div class="food-card">
+
+        <h1>Add New Food</h1>
+
+        <p class="subtitle">
+            Create a new menu item for your café.
+        </p>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="row">
+
+                <div class="input-box">
+                    <label>Food Name</label>
+                    <input type="text" name="name" placeholder="Classic Burger">
+                </div>
+
+                <div class="input-box">
+                    <label>Price</label>
+                    <input type="number" name="price" placeholder="199">
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="input-box">
+
+                    <label>Category</label>
+
+                    <select name="category">
+
+                        <option>Coffee</option>
+                        <option>Burger</option>
+                        <option>Pizza</option>
+                        <option>Dessert</option>
+                        <option>Drinks</option>
+
+                    </select>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Food Image</label>
+
+                    <input type="file" name="image">
+
+                </div>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    placeholder="Write food description..."
+                ></textarea>
+
+            </div>
+
+            <div class="button-area">
+
+                <button type="reset" class="btn clear-btn">
+                    Clear
+                </button>
+
+                <button type="submit" class="btn save-btn">
+                    Save Food
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

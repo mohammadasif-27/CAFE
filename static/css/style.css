@@ -1,7 +1,7 @@
 /* RESET */
 :root {
-    --bg: #dbcd11;
-    --panel: #fbfaf9;
+    --bg: #d4a511;
+    --panel: #949290;
     --panel-soft: rgba(255, 255, 255, 0.08);
     --text: #171716;
     --muted: #d6cabf;
@@ -781,7 +781,6 @@ button {
     padding: 1rem 1rem;
     border-radius: 18px;
     border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.05);
     color: var(--text);
 }
 
@@ -1122,4 +1121,234 @@ footer h3 {
     background-color: #0b0601;
     color: white;
     border-radius: 30%;
+}
+
+/* ===========================
+   STAFF ADD FOOD PAGE
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Poppins,sans-serif;
+    background:#FFD54F;
+
+}
+
+/* Main Container */
+
+.food-container{
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:60px 20px;
+
+}
+
+/* Card */
+
+.food-card{
+
+    width:750px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+
+}
+
+/* Heading */
+
+.food-card h1{
+
+    color:#111;
+
+    font-size:35px;
+
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    color:#555;
+
+    margin-bottom:30px;
+
+}
+
+/* Two Columns */
+
+.row{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}
+
+/* Input */
+
+.input-box{
+
+    margin-bottom:20px;
+
+}
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#111;
+
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    border:2px solid #ddd;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+textarea{
+
+    height:140px;
+
+    resize:none;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#1565C0;
+
+    box-shadow:0 0 12px rgba(21,101,192,.25);
+
+}
+
+/* Buttons */
+
+.button-area{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:20px;
+
+}
+
+.btn{
+
+    border:none;
+
+    padding:14px 35px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.save-btn{
+
+    background:#1565C0;
+
+    color:white;
+
+}
+
+.save-btn:hover{
+
+    background:#0D47A1;
+
+}
+
+.clear-btn{
+
+    background:#111;
+
+    color:#FFD54F;
+
+}
+
+.clear-btn:hover{
+
+    background:#333;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.row{
+
+    grid-template-columns:1fr;
+
+}
+
+.food-card{
+
+    width:100%;
+
+    padding:30px;
+
+}
+
+.button-area{
+
+    flex-direction:column;
+
+}
+
+.btn{
+
+    width:100%;
+
+}
+
 }
