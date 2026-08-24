@@ -104,7 +104,7 @@ def login_view(request):
                 profile = user.profile
 
                 if profile.account_type == 'owner':
-                    return redirect('dashboard')
+                    return redirect('home')
 
                 else:
                     return redirect('home')
