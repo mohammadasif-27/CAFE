@@ -32,24 +32,30 @@
           {{ form.email.errors }}
         </div>
         <!-- Account Type -->
-<div class="form-group">
-  <h3>Choose Account Type</h3>
+       <h3>Choose Account Type</h3>
 
-  <label>
-    <input type="radio" name="account_type" value="customer" checked>
-    Customer
-  </label>
+<div class="account-type">
 
-  <br><br>
+    <input type="radio" id="customer" name="account_type" value="customer" checked>
+    <label for="customer" class="account-card">
+        <div class="icon">👤</div>
+        <h4>Customer</h4>
+        <p>Browse the menu and place orders.</p>
+    </label>
 
-  <label>
-    <input type="radio" name="account_type" value="owner">
-    Cafe Owner
-  </label>
+    <input type="radio" id="owner" name="account_type" value="owner">
+    <label for="owner" class="account-card">
+        <div class="icon">☕</div>
+        <h4>Staff Owner</h4>
+        <p>Manage menu and customer orders.</p>
+    </label>
 
-  <br><br>
 </div>
-
+<script>
+function selectAccount(type) {
+    document.getElementById("account_type").value = type;
+}
+</script>
         <div class="form-grid">
           <div class="form-group">
             {{ form.password1.label_tag }}
