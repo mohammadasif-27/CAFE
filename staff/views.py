@@ -20,3 +20,21 @@ def add_food(request):
         return redirect("add_food")   # Reloads the page after saving
 
     return render(request, "staff/add_food.html")
+
+def edit_food(request, food_id):
+    food = get_object_or_404(Food, id=food_id)
+
+    if request.method == "POST":
+        food.name = request.POST.get("name")
+        food.description = request.POST.get("description")
+        food.category = request.POST.get("category")
+        food.price = request.POST.get("price")
+
+        if request.FILES.get("image"):
+            food.image = request.FILES.get("image")
+
+        food.save()
+
+        return redirect("dashboard")
+
+    return render(request, "staff/edit_food.html", {"food": food})
