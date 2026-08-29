@@ -3,39 +3,68 @@
 {% if foods %}
   {% for food in foods %}
     <article class="menu-card animate-on-scroll" data-category="{{ food.category|lower }}">
+
       <div class="menu-card__image">
         {% if food.image %}
-          <img src="{% static food.image %}" alt="{{ food.name }}" loading="lazy">
+          <img src="{{ food.image.url }}" alt="{{ food.name }}" loading="lazy">
         {% else %}
           <img src="{% static 'images/default-food.jpg' %}" alt="{{ food.name }}" loading="lazy">
         {% endif %}
       </div>
+
       <div class="menu-card__body">
         <span class="menu-card__tag">{{ food.category }}</span>
+
         <h3 class="menu-card__title">{{ food.name }}</h3>
+
         <p class="menu-card__text">{{ food.description }}</p>
       </div>
+
       <div class="menu-card__footer">
+
         <span class="menu-card__price">₹{{ food.price }}</span>
+
         <div class="menu-card__meta">
+
           <span>{{ food.category }}</span>
+
           <div class="menu-card__actions">
+
+            <!-- Add to Cart -->
             <form method="post" action="{% url 'orders:add_to_cart' food.id %}">
               {% csrf_token %}
-              <button class="btn add-to-cart" type="submit">Add to Cart</button>
+              <button class="btn add-to-cart" type="submit">
+                Add to Cart
+              </button>
             </form>
+
+            <!-- Order Now -->
             <form method="post" action="{% url 'orders:order_now' food.id %}">
               {% csrf_token %}
-              <button class="btn btn-secondary" type="submit">Order Now</button>
-              <a href="{% url 'edit_food' food.id %}">Edit</a>
+              <button class="btn btn-secondary" type="submit">
+                Order Now
+              </button>
             </form>
+
+            <!-- Edit button (Staff only) -->             {% if user.is_authenticated and user.profile.account_type == "owner" %}
+              <a href="{% url 'edit_food' food.id %}" class="btn btn-warning">
+                Edit
+              </a>
+            {% endif %}
+
           </div>
+
         </div>
+
       </div>
+
     </article>
   {% endfor %}
+
 {% else %}
-  <div class="menu-empty">
+
+<div class="menu-empty">
     <p>No menu items are available right now. Please check back later.</p>
-  </div>
+</div>
+
 {% endif %}

@@ -67,7 +67,7 @@ def login_view(request):
 
             # Owner -> Dashboard
             if user.profile.account_type == "owner":
-                return redirect("home")
+                return redirect("dashboard")
 
             # Customer -> Home
             return redirect('home')

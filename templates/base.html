@@ -314,5 +314,21 @@
 
   <script src="{% static 'js/main.js' %}" defer></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  {% if messages %}
+    {% for message in messages %}
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "{{ message }}",
+            timer: 2000,
+            showConfirmButton: false
+        });
+    </script>
+    {% endfor %}
+{% endif %}
+
 </body>
 </html>

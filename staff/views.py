@@ -1,11 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from menu.models import Food
 
 
+@login_required
 def dashboard(request):
     return render(request, "staff/dashboard.html")
 
 
+@login_required
 def add_food(request):
     if request.method == "POST":
         Food.objects.create(
@@ -14,13 +18,16 @@ def add_food(request):
             category=request.POST.get("category"),
             price=request.POST.get("price"),
             available=True,
-            image=request.POST.get("image")
+            image=request.FILES.get("image")
         )
 
-        return redirect("add_food")   # Reloads the page after saving
+        messages.success(request, "Food added successfully!")
+        return redirect("add_food")
 
     return render(request, "staff/add_food.html")
 
+
+@login_required
 def edit_food(request, food_id):
     food = get_object_or_404(Food, id=food_id)
 
@@ -31,10 +38,11 @@ def edit_food(request, food_id):
         food.price = request.POST.get("price")
 
         if request.FILES.get("image"):
-            food.image = request.FILES.get("image")
+            food.image = request.FILES["image"]
 
         food.save()
 
-        return redirect("dashboard")
+        messages.success(request, "Food updated successfully!")
+        return redirect("edit_food", food_id=food.id)
 
     return render(request, "staff/edit_food.html", {"food": food})
