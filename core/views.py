@@ -1,17 +1,24 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from .models import Review
 from menu.models import Food
-
 
 def home(request):
     foods = Food.objects.filter(available=True)
+    reviews = Review.objects.all().order_by("-created_at")
 
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        phone = request.POST.get("phone")
-        message = request.POST.get("message")
 
-        print(name, email, phone, message)
+        if request.user.is_authenticated:
 
-    return render(request, "home.html", {"foods": foods})
+            Review.objects.create(
+                user=request.user,
+                rating=request.POST.get("rating"),
+                message=request.POST.get("review"),
+            )
+
+        return redirect("home")
+
+    return render(request, "home.html", {
+        "foods": foods,
+        "reviews": reviews,
+    })
