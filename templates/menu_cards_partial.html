@@ -46,26 +46,6 @@
               </button>
             </form>
 
-            <form method="post" action="{% url 'add_review' %}">
-    {% csrf_token %}
-
-    <input type="hidden" name="food_id" value="{{ food.id }}">
-
-    <select name="rating">
-        <option value="5">⭐⭐⭐⭐⭐</option>
-        <option value="4">⭐⭐⭐⭐</option>
-        <option value="3">⭐⭐⭐</option>
-        <option value="2">⭐⭐</option>
-        <option value="1">⭐</option>
-    </select>
-
-    <textarea name="review" placeholder="Write your review"></textarea>
-
-    <button type="submit" class="btn">
-        Submit Review
-    </button>
-</form>
-
             <!-- Edit button (Staff only) -->             {% if user.is_authenticated and user.profile.account_type == "owner" %}
               <a href="{% url 'edit_food' food.id %}" class="btn btn-warning">
                 Edit
