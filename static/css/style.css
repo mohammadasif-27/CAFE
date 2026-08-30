@@ -1404,3 +1404,67 @@ textarea:focus{
 .account-type input:checked + .account-card p{
     color:#fff;
 }
+
+/* <!-- REVIEW --> */
+.reviews-section{
+    max-width:900px;
+    margin:80px auto;
+    padding:40px;
+    background:#ffffff;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.reviews-section h2{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.reviews-section p{
+    text-align:center;
+}
+
+.review-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    margin-top:30px;
+}
+
+.review-form select,
+.review-form textarea{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.review-form button{
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#8B5E3C;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.review-form button:hover{
+    background:#6d472d;
+}
+
+.review-list{
+    margin-top:40px;
+}
+
+.review-card{
+    background:#f8f8f8;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+
+.review-card h4{
+    margin-bottom:8px;
+}

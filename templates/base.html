@@ -167,6 +167,65 @@
       {% endblock %}
 
     </main>
+    <!-- REVIEW -->
+
+    <section class="reviews-section">
+
+    <h2>⭐ Customer Reviews</h2>
+    <p>Tell us about your experience at CafeHub</p>
+
+    {% if user.is_authenticated %}
+    <form method="POST" action="{% url 'add_review' %}" class="review-form">
+        {% csrf_token %}
+
+        <select name="rating" required>
+            <option value="">Select Rating</option>
+            <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+            <option value="4">⭐⭐⭐⭐ Very Good</option>
+            <option value="3">⭐⭐⭐ Good</option>
+            <option value="2">⭐⭐ Fair</option>
+            <option value="1">⭐ Poor</option>
+        </select>
+
+        <textarea
+            name="review"
+            placeholder="Share your experience..."
+            rows="4"
+            required></textarea>
+
+        <button type="submit">
+            Submit Review
+        </button>
+    </form>
+    {% else %}
+        <p>Please login to write a review.</p>
+    {% endif %}
+
+    <div class="review-list">
+
+        {% for review in reviews %}
+        <div class="review-card">
+
+            <h4>{{ review.user.username }}</h4>
+
+            <p>
+                {% for i in "12345" %}
+                    {% if forloop.counter <= review.rating %}
+                        ⭐
+                    {% endif %}
+                {% endfor %}
+            </p>
+
+            <p>{{ review.message }}</p>
+
+        </div>
+        {% empty %}
+            <p>No reviews yet.</p>
+        {% endfor %}
+
+    </div>
+
+</section>
 
 
     <!-- FOOTER -->

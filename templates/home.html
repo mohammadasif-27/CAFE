@@ -46,34 +46,6 @@
 
 </section>
 
-<form method="POST" action="{% url 'add_review' %}">
-
-    {% csrf_token %}
-
-    <label>Rating</label>
-
-    <select name="rating">
-        <option value="5">⭐⭐⭐⭐⭐</option>
-        <option value="4">⭐⭐⭐⭐</option>
-        <option value="3">⭐⭐⭐</option>
-        <option value="2">⭐⭐</option>
-        <option value="1">⭐</option>
-    </select>
-
-    <br><br>
-
-    <label>Your Review</label>
-
-    <textarea name="review" required></textarea>
-
-    <br><br>
-
-    <button type="submit">
-        Submit Review
-    </button>
-
-</form>
-
 {% include 'home_content_partial.html' %}
 
 {% endblock %}
