@@ -164,6 +164,29 @@
       {% endif %}
 
       {% block content %}
+      <script>
+
+const btn = document.getElementById("seeMoreBtn");
+
+btn.onclick = function(){
+
+    const more = document.getElementById("moreReviews");
+
+    if(more.style.display == "none"){
+
+        more.style.display = "block";
+        btn.innerHTML = "Show Less";
+
+    }else{
+
+        more.style.display = "none";
+        btn.innerHTML = "See More Reviews";
+
+    }
+
+}
+
+</script>
       {% endblock %}
 
     </main>
@@ -203,7 +226,7 @@
 
     <div class="review-list">
 
-        {% for review in reviews %}
+        {% for review in reviews|slice:":4" %}
         <div class="review-card">
 
             <h4>{{ review.user.username }}</h4>
@@ -222,6 +245,35 @@
         {% empty %}
             <p>No reviews yet.</p>
         {% endfor %}
+         
+        <div style="text-align:center; margin-top:20px;">
+    <button id="seeMoreBtn" class="btn">
+        See More Reviews
+    </button>
+</div>
+<div id="moreReviews" style="display:none;">
+
+{% for review in reviews|slice:"4:" %}
+
+<div class="review-card">
+
+    <h4>{{ review.user.username }}</h4>
+
+    <p>
+        {% for i in "12345" %}
+            {% if forloop.counter <= review.rating %}
+                ⭐
+            {% endif %}
+        {% endfor %}
+    </p>
+
+    <p>{{ review.message }}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
 
     </div>
 
@@ -388,6 +440,7 @@
     </script>
     {% endfor %}
 {% endif %}
+
 
 </body>
 </html>
