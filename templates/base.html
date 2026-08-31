@@ -164,29 +164,7 @@
       {% endif %}
 
       {% block content %}
-      <script>
-
-const btn = document.getElementById("seeMoreBtn");
-
-btn.onclick = function(){
-
-    const more = document.getElementById("moreReviews");
-
-    if(more.style.display == "none"){
-
-        more.style.display = "block";
-        btn.innerHTML = "Show Less";
-
-    }else{
-
-        more.style.display = "none";
-        btn.innerHTML = "See More Reviews";
-
-    }
-
-}
-
-</script>
+    
       {% endblock %}
 
     </main>
@@ -440,7 +418,30 @@ btn.onclick = function(){
     </script>
     {% endfor %}
 {% endif %}
+<script>
+const btn = document.getElementById("seeMoreBtn");
+const more = document.getElementById("moreReviews");
 
+if(btn){
+
+    btn.onclick = function(){
+
+        if(more.style.display === "none"){
+
+            more.style.display = "block";
+            btn.innerHTML = "Show Less";
+
+        }else{
+
+            more.style.display = "none";
+            btn.innerHTML = "See More Reviews";
+
+        }
+
+    };
+
+}
+</script>
 
 </body>
 </html>
