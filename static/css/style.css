@@ -1475,3 +1475,64 @@ textarea:focus{
 .review-card h4{
     margin-bottom: 8px;
 }
+/* map */
+.map-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 25px auto;
+}
+
+.map-link {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 18px;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    transition: 0.4s ease;
+}
+
+.map-image {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.map-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.4s ease;
+}
+
+.map-overlay span {
+    background: #ff6b35;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transform: translateY(15px);
+    transition: 0.4s ease;
+}
+
+.map-link:hover .map-image {
+    transform: scale(1.08);
+}
+
+.map-link:hover .map-overlay {
+    opacity: 1;
+}
+
+.map-link:hover .map-overlay span {
+    transform: translateY(0);
+}
+
+.map-link:hover {
+    box-shadow: 0 18px 45px rgba(0,0,0,0.3);
+}

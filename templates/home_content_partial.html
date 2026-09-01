@@ -96,12 +96,25 @@
     </div>
     <div class="contact-layout">
         <div class="contact-info">
-            <p>📍 Hospet, Karnataka</p>
-            <p>📞 +91 98765 43210</p>
+            <p>📍 sandur, Karnataka</p>
+            <p>📞 +91 95352 07086</p>
+            </p>
             <p><a href="mailto:cafehub@gmail.com">cafehub@gmail.com</a></p>
-            <div class="map-placeholder" aria-label="Map placeholder">
-                <span>Map placeholder</span>
-            </div>
+            {% load static %}
+
+<div class="map-container">
+    <a href="https://maps.app.goo.gl/qxUkcSpjX7Lo9zrX6" target="_blank" class="map-link">
+
+        <img src="{% static 'images/location.png' %}"
+             alt="Cafe Location"
+             class="map-image">
+
+        <div class="map-overlay">
+            <span>📍 Open in Google Maps</span>
+        </div>
+
+    </a>
+</div>
         </div>
         <form id="" class="contact-form" method="post" action="">
             {% csrf_token %}
