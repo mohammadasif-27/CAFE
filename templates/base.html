@@ -46,9 +46,6 @@
         {% endif %}
 
         <a class="nav-link" href="#contact">Contact</a>
-        <button id="themeToggle" class="theme-btn" type="button">
-    🌙
-</button>
 
         {% if user.is_authenticated %}
 
@@ -67,6 +64,9 @@
           <a class="nav-link" href="{% url 'accounts:logout' %}">
             Logout
           </a>
+          <button id="themeToggle" class="theme-btn" type="button">
+    🌙
+</button>
 
           <span style="margin-left:6px;color:rgb(28, 28, 131);">
             {% if user.first_name %}
