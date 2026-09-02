@@ -169,7 +169,7 @@
 
     </main>
     <!-- REVIEW -->
-
+    {% if request.path == '/' %}
     <section class="reviews-section">
 
     <h2>⭐ Customer Reviews</h2>
@@ -257,6 +257,8 @@
 
 </section>
 
+    {% endif %}
+
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -330,7 +332,7 @@
 
           <h3>Contact</h3>
 
-          <p>sandur, Karnataka</p>
+          <p>Hospet, Karnataka</p>
           <p>+91 95352 07086</p>
           <p>
             <a href="mailto:cafehub@gmail.com">
