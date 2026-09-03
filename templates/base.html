@@ -64,9 +64,6 @@
           <a class="nav-link" href="{% url 'accounts:logout' %}">
             Logout
           </a>
-          <button id="themeToggle" class="theme-btn" type="button">
-    🌙 Dark
-</button>
 
           <span style="margin-left:6px;color:rgb(28, 28, 131);">
             {% if user.first_name %}
@@ -75,6 +72,9 @@
               Welcome
             {% endif %}
           </span>
+                      <button id="themeToggle" class="theme-btn" type="button">
+    🌙 Dark
+</button>
 
         {% else %}
 
