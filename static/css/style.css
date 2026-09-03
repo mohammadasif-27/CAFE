@@ -1593,3 +1593,6 @@ body.dark-mode li {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 140, 66, 0.4);
 }
+body.dark-mode .review-card p {
+    color: rgb(12, 11, 11);
+}
