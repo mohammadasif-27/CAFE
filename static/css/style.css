@@ -1538,9 +1538,9 @@ textarea:focus{
 .map-link:hover {
     box-shadow: 0 18px 45px rgba(0,0,0,0.3);
 }
-/* Dark Mode */
+/* Dark Mode  */
 
-body.dark-mode {
+ body.dark-mode {
     background: #121212;
     color: white;
 }
@@ -1575,4 +1575,21 @@ body.dark-mode span,
 body.dark-mode label,
 body.dark-mode li {
     color: white;
+}
+ .theme-btn {
+    background: rgb(51, 22, 1);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+    background: #ff6b1a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 140, 66, 0.4);
 }
