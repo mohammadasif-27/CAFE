@@ -1574,7 +1574,7 @@ body.dark-mode p,
 body.dark-mode span,
 body.dark-mode label,
 body.dark-mode li {
-    color: white;
+    color: rgb(18, 1, 1);
 }
  .theme-btn {
     background: rgb(51, 22, 1);
