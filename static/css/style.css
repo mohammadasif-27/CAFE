@@ -470,8 +470,8 @@ button {
 .add-to-cart {
     padding: 0.7rem 1rem;
     border-radius: 999px;
-    background: rgba(192, 139, 92, 0.18);
-    color: #2E5E4E;
+    background:yellow;
+    color: #d3d7d6;
     size: 1cap;
     border: none;
     transition: background 0.25s ease;
