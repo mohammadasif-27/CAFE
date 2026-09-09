@@ -93,17 +93,17 @@
 
 
     <!-- MOBILE NAVBAR -->
-    <div class="mobile-nav" data-mobile-nav>
+    <!-- <div class="mobile-nav" data-mobile-nav>
 
       <nav class="mobile-menu" aria-label="Mobile navigation">
 
         <a class="nav-link" href="{% url 'home' %}">Home</a>
         <a class="nav-link" href="#menu">Menu</a>
-        <!-- <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#about">About</a>
         <a class="nav-link" href="#gallery">Gallery</a> -->
 
         <!-- ONLY STAFF OWNER CAN SEE ADD FOOD -->
-        {% if user.is_authenticated %}
+        <!-- {% if user.is_authenticated %}
           {% if user.profile.account_type == "owner" %}
             <a class="nav-link" href="{% url 'add_food' %}">
               Add Food
@@ -146,7 +146,7 @@
         
 
       </nav>
-    </div>
+    </div> --> 
 
 
     <!-- MAIN CONTENT -->
