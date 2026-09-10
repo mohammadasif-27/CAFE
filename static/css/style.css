@@ -265,7 +265,7 @@ transform:translateY(0);
 }
 
 .special-offer p{
-    color:#eff0f4;
+    color:#000105;
     font-size:16px;
 }
 
@@ -1600,20 +1600,23 @@ textarea:focus{
 
 .reviews-section{
     width:100%;
-    padding:80px 5%;
-    background:#f8fafc;
+    padding-bottom: 20px;
 }
 
 .reviews-section h2{
     text-align:center;
     font-size:40px;
-    color:#111827;
+    color:#e2e6ed;
     margin-bottom:10px;
+}
+.dark-mode .reviews-section h2,
+.dark-mode .reviews-section p{
+    color : rgb(255, 253, 253);
 }
 
 .reviews-section>p{
     text-align:center;
-    color:#6b7280;
+    color:#010610;
     margin-bottom:40px;
 }
 
