@@ -268,6 +268,10 @@ transform:translateY(0);
     color:#000105;
     font-size:16px;
 }
+.dark-mode.special-offer h2,
+.dark-mode.special-offer p{
+    color : black;
+}
 
 /* =========================
    SECTION
@@ -298,6 +302,9 @@ transform:translateY(0);
     font-size:clamp(2.3rem,5vw,3.6rem);
     color:#111827;
     margin-bottom:18px;
+}
+.dark-mode .section-heading h2,{
+    color : black;
 }
 
 .section-heading p{
@@ -920,7 +927,7 @@ transform:translateY(0);
 ========================================== */
 
 .footer{
-    padding:70px 40px 25px;
+    width: 100%;
     background:linear-gradient(135deg,#111827,#1e293b);
     color:#fff;
 }
