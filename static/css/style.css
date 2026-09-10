@@ -17,9 +17,9 @@ body{
     min-height:100vh;
     font-family:'Poppins',sans-serif;
     background:
-        radial-gradient(circle at top left,#6366f130,transparent 40%),
-        radial-gradient(circle at bottom right,#06b6d430,transparent 35%),
-        #0B1120;
+    radial-gradient(circle at top left, #6366f130, transparent 40%),
+    radial-gradient(circle at bottom right, #06b6d430, transparent 35%),
+    #c7cd0a;
     color:var(--text);
     line-height:1.7;
 }
@@ -260,12 +260,12 @@ transform:translateY(0);
 
 .special-offer h2{
     font-size:clamp(2rem,5vw,3rem);
-    color:#111827;
+    color:#06080c;
     margin-bottom:10px;
 }
 
 .special-offer p{
-    color:#6b7280;
+    color:#eff0f4;
     font-size:16px;
 }
 
@@ -286,8 +286,8 @@ transform:translateY(0);
 .section-small{
     display:inline-block;
     padding:8px 18px;
-    background:#eef2ff;
-    color:#4f46e5;
+    background:#0228a5;
+    color:#03021d;
     border-radius:50px;
     font-weight:600;
     letter-spacing:2px;
@@ -301,7 +301,7 @@ transform:translateY(0);
 }
 
 .section-heading p{
-    color:#6b7280;
+    color:#f1f3f6;
     line-height:1.8;
 }
 
@@ -779,7 +779,7 @@ transform:translateY(0);
 
 .contact-info p,
 .contact-info a{
-    color:#6b7280;
+    color:#f3f4f7;
     font-size:17px;
 }
 
@@ -1848,4 +1848,13 @@ body.dark-mode .menu-card,
 body.dark-mode .feature-card,
 body.dark-mode .testimonial-card{
     background:#1e293b;
-    color:#f8fafc
+    color:#f8fafc 
+}
+
+.light span {
+    color: #000;
+}
+
+.dark span {
+    color: #fff;
+}
