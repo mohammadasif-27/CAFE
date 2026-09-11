@@ -27,11 +27,11 @@ body{
 
 .navbar{
     position: fixed;
-    top: 1px;
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 1300px;
+    /* max-width: 1300px; */
 
     display: flex;
     justify-content: space-between;
@@ -268,8 +268,8 @@ transform:translateY(0);
     color:#000105;
     font-size:16px;
 }
-.dark-mode.special-offer h2,
-.dark-mode.special-offer p{
+.dark-mode .special-offer h2,
+.dark-mode .special-offer p{
     color : black;
 }
 
@@ -303,8 +303,8 @@ transform:translateY(0);
     color:#111827;
     margin-bottom:18px;
 }
-.dark-mode .section-heading h2,{
-    color : black;
+.dark-mode  .section-heading h2{
+    color:black;
 }
 
 .section-heading p{
