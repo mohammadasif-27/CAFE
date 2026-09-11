@@ -77,6 +77,13 @@ body{
     align-items: left;
     gap: 25px;
 }
+.brand-logo{
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
 
 /* Links */
 
