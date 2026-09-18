@@ -13,8 +13,41 @@
     --shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
+/* ==========================================
+   GLOBAL BOX MODEL / OVERFLOW FIX
+   (fixes the padding+width math that was
+   causing horizontal scroll & overlap on
+   phones and tablets — no visual change
+   on desktop)
+========================================== */
+
+*,
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+html{
+    overflow-x:hidden;
+    width:100%;
+}
+
+img,
+svg,
+video{
+    max-width:100%;
+    height:auto;
+}
+
+.page-shell{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
+    overflow-x:hidden;
+    width:100%;
     font-family:'Poppins',sans-serif;
     background:
     radial-gradient(circle at top left, #6366f130, transparent 40%),
@@ -136,6 +169,133 @@ body{
     transform:translateY(-3px);
     box-shadow:0 15px 35px rgba(99,102,241,.5);
 }
+
+/* ===== Hamburger / mobile nav toggle ===== */
+
+.nav-toggle{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:42px;
+    height:42px;
+    padding:0;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    flex-shrink:0;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after{
+    display:block;
+    width:24px;
+    height:2px;
+    border-radius:2px;
+    background:#fff;
+    transition:.3s ease;
+}
+
+.hamburger{
+    position:relative;
+}
+
+.hamburger::before,
+.hamburger::after{
+    content:"";
+    position:absolute;
+    left:0;
+}
+
+.hamburger::before{
+    top:-8px;
+}
+
+.hamburger::after{
+    top:8px;
+}
+
+/* animate into an "X" whichever way the JS marks it open
+   (aria-expanded, or a .is-open/.active/.show class) */
+.nav-toggle[aria-expanded="true"] .hamburger,
+.nav-toggle.is-open .hamburger,
+.nav-toggle.active .hamburger{
+    background:transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .hamburger::before,
+.nav-toggle.is-open .hamburger::before,
+.nav-toggle.active .hamburger::before{
+    top:0;
+    transform:rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .hamburger::after,
+.nav-toggle.is-open .hamburger::after,
+.nav-toggle.active .hamburger::after{
+    top:0;
+    transform:rotate(-45deg);
+}
+
+/* Tablets & phones: collapse the nav into a toggleable panel.
+   1024px covers tablets in portrait as well as phones. */
+@media(max-width:1024px){
+
+    .navbar{
+        flex-wrap:wrap;
+        row-gap:0;
+    }
+
+    .nav-toggle{
+        display:flex;
+    }
+
+    .nav-menu.desktop-nav{
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        width:100%;
+        gap:4px;
+        margin-top:16px;
+        padding-top:16px;
+        border-top:1px solid rgba(255,255,255,.1);
+    }
+
+    /* support whichever mechanism main.js uses to reveal the menu */
+    .nav-menu.desktop-nav.is-open,
+    .nav-menu.desktop-nav.active,
+    .nav-menu.desktop-nav.show,
+    .nav-toggle[aria-expanded="true"] ~ .nav-menu.desktop-nav,
+    body.nav-open .nav-menu.desktop-nav{
+        display:flex;
+    }
+
+    .nav-menu .nav-link{
+        width:100%;
+        padding:12px 10px;
+        border-radius:10px;
+    }
+
+    .nav-menu .nav-link:hover{
+        background:rgba(255,255,255,.06);
+    }
+
+    .nav-menu .nav-link::after{
+        display:none;
+    }
+
+    .nav-menu .theme-btn{
+        align-self:flex-start;
+        margin:6px 0 0;
+    }
+
+    .nav-menu span{
+        margin:6px 0 0 !important;
+        display:block;
+    }
+}
+
 /* hero */
 .hero{
     min-height:100vh;
@@ -1373,7 +1533,8 @@ footer p{
 }
 
 .food-card{
-    width:800px;
+    width:100%;
+    max-width:800px;
     background:#fff;
     padding:40px;
     border-radius:25px;
@@ -1874,4 +2035,137 @@ body.dark-mode .testimonial-card{
 
 .dark span {
     color: #fff;
+}
+
+/* ============================================================
+   FINAL MOBILE / TABLET PASS
+   Consolidated fixes for anything still fixed-width or
+   liable to overflow on phones & tablets. Desktop styles
+   above are untouched.
+============================================================ */
+
+/* ---- Tablet (this also picks up the 2-col grids already
+   set at 1100px; here we tighten spacing a bit) ---- */
+@media(max-width:1024px){
+
+    .hero-trust{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .cart-item__image{
+        width:110px;
+        height:110px;
+    }
+
+    .food-container{
+        padding:40px 16px;
+    }
+}
+
+/* ---- Phones ---- */
+@media(max-width:640px){
+
+    .review-list,
+    .account-type,
+    .row{
+        grid-template-columns:1fr;
+    }
+
+    .hero-trust{
+        grid-template-columns:1fr;
+    }
+
+    .contact-info p,
+    .contact-info a{
+        font-size:15px;
+        word-break:break-word;
+    }
+
+    .checkout-item__image{
+        width:90px;
+        height:90px;
+    }
+
+    .order-success-item__image{
+        width:140px;
+        height:140px;
+    }
+
+    .cart-item__image{
+        width:90px;
+        height:90px;
+    }
+
+    .profile td{
+        padding:12px 10px;
+        font-size:14px;
+    }
+
+    .profile-actions,
+    .cta-actions,
+    .button-area{
+        justify-content:stretch;
+    }
+
+    .profile-actions .btn-primary,
+    .profile-actions .btn-danger,
+    .cta-actions .btn-primary,
+    .cta-actions .btn-secondary{
+        flex:1 1 100%;
+        text-align:center;
+    }
+
+    .social-links{
+        gap:18px;
+    }
+
+    .account-card,
+    .food-card,
+    .contact-form,
+    .review-form{
+        padding:25px 20px;
+    }
+
+    .special-offer{
+        padding:25px 20px;
+    }
+}
+
+/* ---- Very small phones ---- */
+@media(max-width:380px){
+
+    .brand-logo{
+        font-size:22px;
+    }
+
+    .hero h1{
+        font-size:1.9rem;
+    }
+
+    .hero-content{
+        padding:22px;
+    }
+
+    .section-heading h2{
+        font-size:1.9rem;
+    }
+
+    .menu-card__title,
+    .feature-card h3,
+    .account-card h4{
+        font-size:19px;
+    }
+
+    .navbar{
+        padding:12px 16px;
+    }
+}
+
+/* Belt-and-braces: nothing on the page should ever be able
+   to force a horizontal scrollbar. */
+.container,
+section,
+.section,
+.food-container{
+    max-width:100%;
 }
