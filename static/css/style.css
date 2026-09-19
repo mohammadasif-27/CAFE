@@ -240,7 +240,7 @@ body{
 
 /* Tablets & phones: collapse the nav into a toggleable panel.
    1024px covers tablets in portrait as well as phones. */
-@media(max-width:1024px){
+@media(max-width:1023px){
 
     .navbar{
         flex-wrap:wrap;
@@ -1115,6 +1115,7 @@ transform:translateY(0);
 .footer p{
     color:#cbd5e1;
     line-height:1.8;
+    overflow-wrap:break-word;
 }
 
 .footer-links{
@@ -1274,7 +1275,8 @@ transform:translateY(0);
 }
 
 .footer-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2,1fr);
+    gap:32px 20px;
 }
 
 .special-offer,
@@ -1296,7 +1298,50 @@ transform:translateY(0);
 }
 
 .menu-card img{
-    height:200px;
+    height:170px;
+}
+
+.menu-card__body{
+    padding:16px;
+}
+
+.menu-card__title{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.menu-card__text{
+    margin-bottom:14px;
+    font-size:14px;
+    /* visually clamps long descriptions so cards stay compact;
+       the full text is still in the HTML/DOM, just not all shown */
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+}
+
+.menu-card__footer{
+    padding:0 16px 16px;
+}
+
+.menu-card__price{
+    font-size:20px;
+}
+
+.add-to-cart{
+    padding:10px 18px;
+    font-size:14px;
+}
+
+.menu-filters{
+    gap:10px;
+    margin-bottom:35px;
+}
+
+.filter-button{
+    padding:10px 18px;
+    font-size:14px;
 }
 
 .footer{
@@ -2046,7 +2091,7 @@ body.dark-mode .testimonial-card{
 
 /* ---- Tablet (this also picks up the 2-col grids already
    set at 1100px; here we tighten spacing a bit) ---- */
-@media(max-width:1024px){
+@media(max-width:1023px){
 
     .hero-trust{
         grid-template-columns:repeat(2,1fr);
@@ -2060,15 +2105,50 @@ body.dark-mode .testimonial-card{
     .food-container{
         padding:40px 16px;
     }
+
+    .menu-card img{
+        height:210px;
+        object-position:center;
+    }
+
+    .menu-card__body{
+        padding:18px;
+    }
+
+    .menu-card__footer{
+        padding:0 18px 18px;
+    }
 }
 
 /* ---- Phones ---- */
 @media(max-width:640px){
 
-    .review-list,
     .account-type,
     .row{
         grid-template-columns:1fr;
+    }
+
+    .review-list{
+        grid-template-columns:repeat(2,1fr);
+        gap:16px;
+    }
+
+    .review-card{
+        padding:18px;
+    }
+
+    .review-card h4{
+        font-size:16px;
+    }
+
+    .review-card p{
+        font-size:13px;
+        line-height:1.5;
+    }
+
+    .review-card::before{
+        font-size:13px;
+        margin-bottom:8px;
     }
 
     .hero-trust{
@@ -2159,6 +2239,11 @@ body.dark-mode .testimonial-card{
     .navbar{
         padding:12px 16px;
     }
+
+    /* too narrow for 2 review cards side by side without cramping text */
+    .review-list{
+        grid-template-columns:1fr;
+    }
 }
 
 /* Belt-and-braces: nothing on the page should ever be able
@@ -2168,4 +2253,433 @@ section,
 .section,
 .food-container{
     max-width:100%;
+}
+
+/* Keep content columns shrinkable on narrow screens without changing the desktop layout. */
+@media(max-width:768px){
+
+    .menu-grid,
+    .features-grid,
+    .testimonials-grid,
+    .contact-layout,
+    .checkout-grid,
+    .cart-grid,
+    .orders-grid,
+    .profile-grid{
+        grid-template-columns:minmax(0,1fr);
+    }
+
+    .menu-card,
+    .feature-card,
+    .testimonial-card,
+    .contact-form,
+    .checkout-summary,
+    .checkout-form-card,
+    .cart-list,
+    .cart-summary,
+    .order-card,
+    .profile-card,
+    .auth-card,
+    .food-card{
+        min-width:0;
+        max-width:100%;
+    }
+
+    .menu-card__footer,
+    .menu-card__meta,
+    .cart-item__meta,
+    .cart-item__actions form,
+    .checkout-item,
+    .profile-actions,
+    .auth-card form > div[style*="display:flex"]{
+        flex-wrap:wrap;
+    }
+
+    .menu-card__footer{
+        align-items:flex-start;
+        gap:12px;
+    }
+
+    .menu-card__meta{
+        min-width:0;
+        flex:1 1 100%;
+        justify-content:space-between;
+    }
+
+    .menu-card__actions,
+    .menu-card__actions form,
+    .cart-item__actions,
+    .cart-item__actions form{
+        display:flex;
+        flex-wrap:wrap;
+        gap:10px;
+        max-width:100%;
+    }
+
+    .filter-button,
+    .btn,
+    .checkout-btn,
+    .continue-shopping{
+        max-width:100%;
+    }
+
+    .cart-item{
+        display:grid;
+        grid-template-columns:minmax(0,1fr);
+        min-width:0;
+    }
+
+    .cart-item__image{
+        width:min(100%,110px);
+        height:auto;
+        aspect-ratio:1;
+    }
+
+    .cart-item__details,
+    .checkout-item > div,
+    .profile-details{
+        min-width:0;
+        overflow-wrap:anywhere;
+    }
+
+    .checkout-item{
+        display:grid;
+        grid-template-columns:minmax(0,90px) minmax(0,1fr) auto;
+        align-items:center;
+        gap:12px;
+    }
+
+    .checkout-item__image,
+    .order-success-item__image{
+        width:100%;
+        max-width:140px;
+        height:auto;
+        aspect-ratio:1;
+    }
+
+    .auth-card form > div[style*="display:flex"]{
+        align-items:stretch;
+    }
+
+    .auth-card form > div[style*="display:flex"] > *{
+        flex:1 1 auto;
+        min-width:0;
+    }
+
+    .table-responsive{
+        width:100%;
+        max-width:100%;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .order-table{
+        width:100%;
+        table-layout:fixed;
+    }
+
+    .order-table th,
+    .order-table td{
+        overflow-wrap:anywhere;
+    }
+}
+
+@media(max-width:480px){
+
+    .section,
+    .food-container{
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .hero-content,
+    .auth-card,
+    .food-card,
+    .contact-form,
+    .checkout-summary,
+    .checkout-form-card,
+    .summary-card,
+    .profile-card{
+        padding-left:20px;
+        padding-right:20px;
+    }
+
+    .checkout-item{
+        grid-template-columns:minmax(0,72px) minmax(0,1fr);
+    }
+
+    .checkout-item > div:last-child{
+        grid-column:2;
+    }
+
+    .cart-item__meta,
+    .menu-card__meta{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:6px;
+    }
+
+    .menu-card__actions .btn,
+    .cart-item__actions .btn,
+    .auth-card form > div[style*="display:flex"] .btn,
+    .auth-card form > div[style*="display:flex"] a{
+        width:100%;
+    }
+}
+
+/* Compact mobile storefront layout. All changes in this block are below 1024px. */
+@media(max-width:1023px){
+
+    .navbar{
+        flex-direction:row;
+        align-items:center;
+        padding:10px 16px;
+    }
+
+    .nav-menu.desktop-nav{
+        flex-basis:100%;
+    }
+
+    .section,
+    .why-section,
+    .menu-section,
+    .contact-section{
+        padding-top:36px;
+        padding-bottom:36px;
+    }
+
+    .hero{
+        min-height:auto;
+        padding:88px 16px 28px;
+    }
+
+    .hero-content{
+        padding:20px;
+    }
+
+    .hero h1{
+        font-size:clamp(2rem,7vw,3rem);
+    }
+
+    .menu-grid,
+    .features-grid,
+    .account-type{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:12px;
+    }
+
+    .menu-card,
+    .feature-card,
+    .account-card{
+        border-radius:12px;
+    }
+
+    .menu-card img{
+        height:auto;
+        aspect-ratio:1.35;
+    }
+
+    .menu-card__body,
+    .feature-card,
+    .account-card{
+        padding:10px;
+    }
+
+    .menu-card__title,
+    .feature-card h3,
+    .account-card h4{
+        font-size:15px;
+        line-height:1.3;
+        display:-webkit-box;
+        line-clamp:2;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+    }
+
+    .menu-card__text,
+    .feature-card p,
+    .account-card p{
+        font-size:12px;
+        line-height:1.45;
+    }
+
+    .menu-card__text{
+        display:-webkit-box;
+        line-clamp:2;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+        margin-bottom:8px;
+    }
+
+    .menu-card__footer{
+        padding:0 10px 10px;
+        gap:8px;
+    }
+
+    .menu-card__price{
+        font-size:17px;
+        color:#4f46e5;
+    }
+
+    .menu-card__meta{
+        gap:6px;
+        font-size:12px;
+    }
+
+    .menu-card__actions{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:6px;
+        width:100%;
+    }
+
+    .menu-card__actions form,
+    .menu-card__actions .btn{
+        width:100%;
+        min-width:0;
+    }
+
+    .menu-card__actions .btn{
+        min-height:38px;
+        padding:7px 5px;
+        font-size:11px;
+        line-height:1.2;
+        white-space:normal;
+    }
+
+    .menu-filters{
+        justify-content:flex-start;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        gap:8px;
+        margin:0 -4px 24px;
+        padding:4px;
+        scrollbar-width:none;
+    }
+
+    .menu-filters::-webkit-scrollbar{
+        display:none;
+    }
+
+    .filter-button{
+        flex:0 0 auto;
+        min-height:36px;
+        padding:8px 13px;
+        font-size:12px;
+        white-space:nowrap;
+    }
+
+    .special-offer,
+    .cta-section{
+        margin:12px;
+        padding:22px 16px;
+        border-radius:16px;
+    }
+
+    .special-offer h2,
+    .cta-section h2{
+        font-size:clamp(1.45rem,6vw,2rem);
+    }
+
+    .section-heading{
+        margin-bottom:24px;
+    }
+
+    .section-heading h2{
+        font-size:clamp(1.65rem,6vw,2.4rem);
+    }
+
+    .review-list{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+        margin-top:24px;
+    }
+
+    .review-card{
+        padding:12px;
+        border-radius:12px;
+    }
+
+    .review-card h4{
+        font-size:14px;
+    }
+
+    .review-card p{
+        font-size:12px;
+    }
+
+    .footer-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:18px 12px;
+    }
+
+    .cart-item,
+    .checkout-item,
+    .order-card,
+    .profile-card,
+    .auth-card,
+    .checkout-summary,
+    .checkout-form-card{
+        border-radius:12px;
+    }
+
+    .cart-item__details h3,
+    .order-card h3{
+        font-size:16px;
+    }
+
+    .cart-item__meta,
+    .checkout-item,
+    .order-card p,
+    .profile-details,
+    .form-group label{
+        font-size:12px;
+    }
+
+    .profile-actions,
+    .button-area,
+    .checkout-form-card .form-row{
+        gap:8px;
+    }
+
+    .profile-actions .btn,
+    .button-area .btn,
+    .checkout-btn,
+    .continue-shopping{
+        min-height:38px;
+        padding:9px 12px;
+        font-size:12px;
+    }
+}
+
+@media(max-width:380px){
+
+    .navbar{
+        padding:9px 12px;
+    }
+
+    .brand-logo{
+        font-size:20px;
+    }
+
+    .menu-grid,
+    .features-grid,
+    .account-type{
+        gap:10px;
+    }
+
+    .menu-card__actions{
+        grid-template-columns:1fr;
+    }
+
+    .menu-card__actions .btn{
+        font-size:12px;
+    }
+
+    .review-list,
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
 }
