@@ -12,7 +12,7 @@
   <div class="profile-card">
     <div class="profile-grid">
       <div>
-        <div class="profile-avatar">
+        <!-- <div class="profile-avatar">
           {% if user.first_name %}
             {{ user.first_name|slice:":1"|upper }}
           {% elif user.username %}
@@ -20,7 +20,7 @@
           {% else %}
             C
           {% endif %}
-        </div>
+        </div> -->
         <div class="profile-header">
           <h1>Welcome, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}</h1>
           <p class="profile-meta">Member since {{ user.date_joined|date:'F Y' }}</p>
