@@ -3,6 +3,14 @@
 
 {% block title %}Add Food{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/owner-navbar.css' %}">
+{% endblock %}
+
+{% block navbar %}
+{% include "staff/owner_navbar.html" %}
+{% endblock navbar %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/staff.css' %}">
 {% endblock %}

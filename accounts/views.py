@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -22,7 +23,10 @@ def register_view(request):
             owner_code = request.POST.get('owner_code')
 
             # Check owner code
-            if account_type == "owner" and owner_code != "1234":
+            if account_type == "owner" and (
+                not settings.OWNER_ACCESS_CODE
+                or owner_code != settings.OWNER_ACCESS_CODE
+            ):
                 messages.error(request, "Wrong Owner Access Code!")
                 return render(request, "accounts/register.html", {"form": form})
 

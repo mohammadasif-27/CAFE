@@ -8,12 +8,14 @@
   <title>{% block title %}CafeHub{% endblock %}</title>
 
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_head %}{% endblock %}
 </head>
 
 <body>
 
   <div class="page-shell">
 
+    {% block navbar %}
     <!-- NAVBAR -->
     <header class="navbar" role="banner">
 
@@ -90,6 +92,7 @@
 
       </nav>
     </header>
+    {% endblock navbar %}
 
 
     <!-- MOBILE NAVBAR -->

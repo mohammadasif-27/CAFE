@@ -1,16 +1,141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Owner Dashboard — CafeHub</title>
+    <link rel="stylesheet" href="/static/css/owner-dashboard.css">
+    <link rel="stylesheet" href="/static/css/owner-navbar.css">
 </head>
 <body>
-       <h1>Owner Dashboard</h1>
+{% include "staff/owner_navbar.html" %}
 
-<a href="{% url 'add_food' %}">
-    <button>Add Food</button>
-</a>
+<div class="owner-dashboard">
+    <header class="owner-dashboard__header">
+        <div>
+            <p class="owner-dashboard__eyebrow">CAFEHUB MANAGEMENT</p>
+            <h1>Owner Dashboard</h1>
+            <p class="owner-dashboard__intro">A quick overview of your cafe's menu and orders.</p>
+        </div>
+        <!-- <div class="owner-dashboard__actions">
+            <a class="owner-dashboard__button owner-dashboard__button--primary" href="{% url 'add_food' %}">Add Food</a>
+            <a class="owner-dashboard__button owner-dashboard__button--secondary" href="#foods">Manage Foods</a>
+            <a class="owner-dashboard__button owner-dashboard__button--secondary" href="#orders">Manage Orders</a>
+        </div> -->
+    </header>
 
+    <section class="owner-dashboard__stats" aria-label="Cafe overview">
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Total Foods</span>
+            <strong>{{ total_foods }}</strong>
+        </article>
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Available Foods</span>
+            <strong>{{ available_foods }}</strong>
+        </article>
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Total Orders</span>
+            <strong>{{ total_orders }}</strong>
+        </article>
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Pending Orders</span>
+            <strong>{{ pending_orders }}</strong>
+        </article>
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Total Customers</span>
+            <strong>{{ total_customers }}</strong>
+        </article>
+        <article class="owner-dashboard__stat owner-dashboard__stat--sales">
+            <span class="owner-dashboard__stat-label">Today's Sales</span>
+            <strong>₹{{ today_sales|floatformat:2 }}</strong>
+            <span class="owner-dashboard__stat-note">Completed orders today</span>
+        </article>
+    </section>
+
+    <section class="owner-dashboard__panel" id="foods">
+        <div class="owner-dashboard__panel-heading">
+            <div>
+                <h2>Manage Foods</h2>
+                <p>Review menu items and update their details.</p>
+            </div>
+            <a class="owner-dashboard__text-link" href="{% url 'add_food' %}">+ Add Food</a>
+        </div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead>
+                    <tr>
+                        <th scope="col">Food</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Availability</th>
+                        <th scope="col"><span class="sr-only">Action</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for food in foods %}
+                    <tr>
+                        <td data-label="Food">{{ food.name }}</td>
+                        <td data-label="Category">{{ food.category }}</td>
+                        <td data-label="Price">₹{{ food.price }}</td>
+                        <td data-label="Availability">
+                            <span class="owner-dashboard__badge {% if food.available %}owner-dashboard__badge--available{% else %}owner-dashboard__badge--unavailable{% endif %}">
+                                {% if food.available %}Available{% else %}Unavailable{% endif %}
+                            </span>
+                        </td>
+                        <td data-label="Action">
+                            <a class="owner-dashboard__table-link" href="{% url 'edit_food' food.id %}">Edit</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td class="owner-dashboard__empty" colspan="5">No food items yet. Add your first menu item to get started.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="owner-dashboard__panel" id="orders">
+        <div class="owner-dashboard__panel-heading">
+            <div>
+                <h2>Manage Orders</h2>
+                <p>View customer orders and their current status.</p>
+            </div>
+        </div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead>
+                    <tr>
+                        <th scope="col">Order</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td data-label="Order">{{ order.order_number }}</td>
+                        <td data-label="Customer">{{ order.customer_name }}</td>
+                        <td data-label="Date">{{ order.created_at|date:"M j, Y" }}</td>
+                        <td data-label="Status">
+                            <span class="owner-dashboard__badge {% if order.status == 'completed' %}owner-dashboard__badge--available{% else %}owner-dashboard__badge--pending{% endif %}">
+                                {{ order.get_status_display }}
+                            </span>
+                        </td>
+                        <td data-label="Total">₹{{ order.total }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td class="owner-dashboard__empty" colspan="5">No orders have been placed yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
 </body>
 </html>

@@ -1,0 +1,13 @@
+<header class="owner-navbar" role="banner">
+    <a class="owner-navbar__brand" href="{% url 'dashboard' %}">
+        <span class="owner-navbar__brand-name">CafeHub</span>
+        <span class="owner-navbar__brand-role">Owner / Staff</span>
+    </a>
+    <nav class="owner-navbar__links" aria-label="Owner navigation">
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'dashboard' %}#foods">Manage Foods</a>
+        <a href="{% url 'add_food' %}">Add Food</a>
+        <a href="{% url 'dashboard' %}#orders">Orders</a>
+        <a class="owner-navbar__logout" href="{% url 'accounts:logout' %}">Logout</a>
+    </nav>
+</header>
