@@ -12,6 +12,8 @@ CafeHub is a Django-powered web application for managing a cafe's online menu an
 * Add, edit, and delete food items
 * Upload food images
 * Contact form for customer enquiries
+* Owner dashboard inbox for saved contact messages
+* Upload food images and update item availability
 * PostgreSQL database integration
 
 ## 🖥️ Tech Stack
@@ -78,11 +80,17 @@ Create a `.env` file in the project root:
 
 ```env
 DJANGO_SECRET_KEY=replace_with_a_private_secret_key
+OWNER_ACCESS_CODE=replace_with_a_private_owner_code
+DB_NAME=new_cafe_db
+DB_USER=your_postgres_user
+DB_PASSWORD=your_postgres_password
+DB_HOST=localhost
+DB_PORT=5432
 ```
 
 * Install and start PostgreSQL.
 * Create a database named `new_cafe_db`.
-* Configure your database username and password in your local Django settings.
+* Replace the sample values above with your local PostgreSQL credentials.
 
 **Important:** Never upload your `.env` file, secret key, or database passwords to GitHub.
 
@@ -114,6 +122,7 @@ http://127.0.0.1:8000/
 
 * This project uses PostgreSQL.
 * Uploaded food images are stored in the local media directory during development.
+* Contact form submissions are saved in the database and shown in the owner dashboard; no email is sent.
 * The Django development server is intended for local development, not production deployment.
 
 ## 👨‍💻 Developer

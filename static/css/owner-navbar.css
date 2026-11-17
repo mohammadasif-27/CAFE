@@ -60,7 +60,9 @@
 }
 
 .owner-navbar__links a:hover,
-.owner-navbar__links a:focus-visible {
+.owner-navbar__links a:focus-visible,
+.owner-navbar__links button:hover,
+.owner-navbar__links button:focus-visible {
     background: #f5f0ea;
     color: #70452e;
 }
@@ -69,6 +71,9 @@
     margin-left: .3rem;
     border: 1px solid #e4d8ce;
     color: #784b35;
+    background: transparent;
+    padding: .5rem .7rem;
+    cursor: pointer;
 }
 
 @media (max-width: 720px) {

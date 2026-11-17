@@ -19,9 +19,9 @@
           <div class="order-success-item">
             <div class="order-success-item__image">
               {% if item.food.image %}
-                <img src="{% static item.food.image %}" alt="{{ item.food.name }}" loading="lazy">
+                <img src="{{ item.food.image.url }}" alt="{{ item.food.name }}" loading="lazy">
               {% else %}
-                <img src="{% static 'images/default-food.jpg' %}" alt="{{ item.food.name }}" loading="lazy">
+                <img src="{% static 'images/default-food.svg' %}" alt="{{ item.food.name }}" loading="lazy">
               {% endif %}
             </div>
             <div class="order-success-item__details">

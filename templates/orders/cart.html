@@ -29,7 +29,7 @@
                         {% if item.food.image %}
 
                             <img
-                                src="{% static item.food.image %}"
+                                src="{{ item.food.image.url }}"
                                 alt="{{ item.food.name }}"
                                 loading="lazy"
                             >
@@ -37,7 +37,7 @@
                         {% else %}
 
                             <img
-                                src="{% static 'images/default-food.jpg' %}"
+                                src="{% static 'images/default-food.svg' %}"
                                 alt="{{ item.food.name }}"
                                 loading="lazy"
                             >
@@ -212,7 +212,6 @@
     </div>
 
 {% endif %}
-```
 
 </div>
 

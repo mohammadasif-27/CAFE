@@ -11,6 +11,13 @@
 {% include "staff/owner_navbar.html" %}
 
 <div class="owner-dashboard">
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <p class="message message-{{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
     <header class="owner-dashboard__header">
         <div>
             <p class="owner-dashboard__eyebrow">CAFEHUB MANAGEMENT</p>
@@ -46,9 +53,9 @@
             <strong>{{ total_customers }}</strong>
         </article>
         <article class="owner-dashboard__stat owner-dashboard__stat--sales">
-            <span class="owner-dashboard__stat-label">Today's Sales</span>
-            <strong>₹{{ today_sales|floatformat:2 }}</strong>
-            <span class="owner-dashboard__stat-note">Completed orders today</span>
+            <span class="owner-dashboard__stat-label">Completed Sales</span>
+            <strong>₹{{ completed_sales|floatformat:2 }}</strong>
+            <span class="owner-dashboard__stat-note">All completed orders</span>
         </article>
     </section>
 
@@ -84,6 +91,10 @@
                         </td>
                         <td data-label="Action">
                             <a class="owner-dashboard__table-link" href="{% url 'edit_food' food.id %}">Edit</a>
+                            <form method="post" action="{% url 'delete_food' food.id %}" onsubmit="return confirm('Delete this food item?')">
+                                {% csrf_token %}
+                                <button type="submit">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     {% empty %}
@@ -112,6 +123,7 @@
                         <th scope="col">Date</th>
                         <th scope="col">Status</th>
                         <th scope="col">Total</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -126,10 +138,55 @@
                             </span>
                         </td>
                         <td data-label="Total">₹{{ order.total }}</td>
+                        <td data-label="Action">
+                            {% if order.status == 'pending' %}
+                            <form method="post" action="{% url 'complete_order' order.id %}">
+                                {% csrf_token %}
+                                <button type="submit">Mark completed</button>
+                            </form>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td class="owner-dashboard__empty" colspan="5">No orders have been placed yet.</td>
+                        <td class="owner-dashboard__empty" colspan="6">No orders have been placed yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="owner-dashboard__panel" id="contact-messages">
+        <div class="owner-dashboard__panel-heading">
+            <div>
+                <h2>Contact Messages</h2>
+                <p>Recent messages submitted by cafe visitors.</p>
+            </div>
+        </div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Received</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contact_messages %}
+                    <tr>
+                        <td>{{ contact.name }}</td>
+                        <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
+                        <td>{{ contact.phone }}</td>
+                        <td>{{ contact.message }}</td>
+                        <td>{{ contact.created_at|date:"M j, Y H:i" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td class="owner-dashboard__empty" colspan="5">No contact messages yet.</td>
                     </tr>
                     {% endfor %}
                 </tbody>

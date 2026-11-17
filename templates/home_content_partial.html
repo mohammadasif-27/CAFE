@@ -18,9 +18,10 @@
         <button class="filter-button filter-button--active" type="button" data-filter="all">All</button>
         <button class="filter-button" type="button" data-filter="coffee">Coffee</button>
         <button class="filter-button" type="button" data-filter="breakfast">Breakfast</button>
-        <button class="filter-button" type="button" data-filter="burgers">Burgers</button>
+        <button class="filter-button" type="button" data-filter="burger">Burgers</button>
         <button class="filter-button" type="button" data-filter="pizza">Pizza</button>
-        <button class="filter-button" type="button" data-filter="desserts">Desserts</button>
+        <button class="filter-button" type="button" data-filter="dessert">Desserts</button>
+        <button class="filter-button" type="button" data-filter="drink">Drinks</button>
     </div>
     <div class="menu-grid">
         <!-- menu cards (same as before) -->
@@ -115,26 +116,29 @@
     </a>
 </div>
         </div>
-        <form id="" class="contact-form" method="post" action="">
+        <form id="contact-form" class="contact-form" method="post" action="{% url 'home' %}#contact">
             {% csrf_token %}
             <div class="form-group">
                 <label for="name">Name</label>
-                <input id="name" name="name" type="text" placeholder="Your name" required>
+                <input id="name" name="name" type="text" maxlength="150" value="{{ contact_form.name.value|default_if_none:'' }}" placeholder="Your name" required>
+                {{ contact_form.name.errors }}
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="Your email" required>
+                <input id="email" name="email" type="email" maxlength="254" value="{{ contact_form.email.value|default_if_none:'' }}" placeholder="Your email" required>
+                {{ contact_form.email.errors }}
             </div>
             <div class="form-group">
                 <label for="phone">Phone</label>
-                <input id="phone" name="phone" type="tel" placeholder="Your phone" required>
+                <input id="phone" name="phone" type="tel" maxlength="20" value="{{ contact_form.phone.value|default_if_none:'' }}" placeholder="Your phone" required>
+                {{ contact_form.phone.errors }}
             </div>
             <div class="form-group">
                 <label for="message">Message</label>
-                <textarea id="message" name="message" rows="4" placeholder="How can we help?" required></textarea>
+                <textarea id="message" name="message" rows="4" maxlength="2000" placeholder="How can we help?" required>{{ contact_form.message.value|default_if_none:'' }}</textarea>
+                {{ contact_form.message.errors }}
             </div>
             <button class="btn btn-primary" type="submit">Send Message</button>
-            <p class="form-feedback" data-form-feedback aria-live="polite"></p>
         </form>
     </div>
 </section>

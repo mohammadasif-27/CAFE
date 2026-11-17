@@ -63,9 +63,10 @@
             My Orders
           </a>
 
-          <a class="nav-link" href="{% url 'accounts:logout' %}">
-            Logout
-          </a>
+          <form method="post" action="{% url 'accounts:logout' %}" class="logout-form">
+            {% csrf_token %}
+            <button class="nav-link" type="submit">Logout</button>
+          </form>
 
           <span style="margin-left:6px;color:rgb(154, 4, 7);">
             {% if user.first_name %}
@@ -197,7 +198,7 @@
         </select>
 
         <textarea
-            name="review"
+                name="message"
             placeholder="Share your experience..."
             rows="4"
             required></textarea>

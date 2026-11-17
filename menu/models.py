@@ -1,11 +1,16 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 
 class Food(models.Model):
     name = models.CharField(max_length=120)
     description = models.TextField(blank=True)
     category = models.CharField(max_length=60)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    price = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        validators=[MinValueValidator(0.01)],
+    )
     available = models.BooleanField(default=True)
 
     # Upload image to media/foods/

@@ -19,9 +19,9 @@
             <div class="checkout-item">
               <div class="checkout-item__image">
                 {% if item.food.image %}
-                  <img src="{% static item.food.image %}" alt="{{ item.food.name }}" loading="lazy">
+                  <img src="{{ item.food.image.url }}" alt="{{ item.food.name }}" loading="lazy">
                 {% else %}
-                  <img src="{% static 'images/default-food.jpg' %}" alt="{{ item.food.name }}" loading="lazy">
+                  <img src="{% static 'images/default-food.svg' %}" alt="{{ item.food.name }}" loading="lazy">
                 {% endif %}
               </div>
               <div>
@@ -47,25 +47,30 @@
         <form method="post" action="{% url 'orders:place_order' %}">
           {% csrf_token %}
           <div class="form-group">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" required>
+            <label for="{{ form.name.id_for_label }}">Name</label>
+            {{ form.name }}
+            {{ form.name.errors }}
           </div>
           <div class="form-group">
-            <label for="phone">Phone</label>
-            <input id="phone" name="phone" type="tel" required>
+            <label for="{{ form.phone.id_for_label }}">Phone</label>
+            {{ form.phone }}
+            {{ form.phone.errors }}
           </div>
           <div class="form-group">
-            <label for="address">Address</label>
-            <textarea id="address" name="address" rows="3" required></textarea>
+            <label for="{{ form.address.id_for_label }}">Address</label>
+            {{ form.address }}
+            {{ form.address.errors }}
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="city">City</label>
-              <input id="city" name="city" type="text" required>
+              <label for="{{ form.city.id_for_label }}">City</label>
+              {{ form.city }}
+              {{ form.city.errors }}
             </div>
             <div class="form-group">
-              <label for="pincode">Pincode</label>
-              <input id="pincode" name="pincode" type="text" required>
+              <label for="{{ form.pincode.id_for_label }}">Pincode</label>
+              {{ form.pincode }}
+              {{ form.pincode.errors }}
             </div>
           </div>
           <div class="form-group">

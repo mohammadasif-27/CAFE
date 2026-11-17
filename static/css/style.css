@@ -129,6 +129,14 @@ body{
     transition: all .35s ease;
 }
 
+button.nav-link{
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+}
+
 .nav-link:hover{
     color: #fff;
 }

@@ -7,6 +7,10 @@ class RegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)
     email = forms.EmailField(max_length=254, required=True)
+    account_type = forms.ChoiceField(
+        choices=(('customer', 'Customer'), ('owner', 'Staff Owner')),
+        initial='customer',
+    )
 
     class Meta:
         model = User

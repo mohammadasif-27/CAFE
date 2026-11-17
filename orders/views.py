@@ -5,45 +5,64 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.utils import timezone
+from django.utils.http import url_has_allowed_host_and_scheme
 
 from menu.models import Food
+from .forms import DeliveryForm
 from .models import CartItem, Order, OrderItem
+from .services import add_food_to_cart
 
 DELIVERY_FEE = Decimal('40.00')
-
-
-def _add_food_to_cart(user, food):
-    cart_item, created = CartItem.objects.get_or_create(user=user, food=food)
-    if not created:
-        cart_item.quantity += 1
-        cart_item.save()
-    return cart_item
 
 
 def _generate_order_number(order_id):
     return f"CAF-{order_id:04d}"
 
 
-@login_required(login_url='accounts:login')
+def _safe_referer(request):
+    referer = request.META.get('HTTP_REFERER')
+    if referer and url_has_allowed_host_and_scheme(
+        referer,
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure(),
+    ):
+        return referer
+    return reverse('home')
+
+
 def add_to_cart(request, food_id):
     if request.method != 'POST':
-        return redirect(request.META.get('HTTP_REFERER', reverse('home')))
+        return redirect(_safe_referer(request))
 
     food = get_object_or_404(Food, id=food_id, available=True)
-    _add_food_to_cart(request.user, food)
+    if not request.user.is_authenticated:
+        request.session['pending_cart_action'] = {
+            'food_id': food.pk,
+            'action': 'add',
+        }
+        messages.info(request, "Sign in to add this item; it will be added after you log in.")
+        return redirect('accounts:login')
+
+    add_food_to_cart(request.user, food)
 
     messages.success(request, f"Added {food.name} to your cart.")
-    return redirect(request.META.get('HTTP_REFERER', reverse('home')))
+    return redirect(_safe_referer(request))
 
 
-@login_required(login_url='accounts:login')
 def order_now(request, food_id):
     if request.method != 'POST':
-        return redirect(request.META.get('HTTP_REFERER', reverse('home')))
+        return redirect(_safe_referer(request))
 
     food = get_object_or_404(Food, id=food_id, available=True)
-    _add_food_to_cart(request.user, food)
+    if not request.user.is_authenticated:
+        request.session['pending_cart_action'] = {
+            'food_id': food.pk,
+            'action': 'order_now',
+        }
+        messages.info(request, "Sign in to order this item; it will be added after you log in.")
+        return redirect('accounts:login')
+
+    add_food_to_cart(request.user, food)
 
     messages.success(request, f"{food.name} is now in your cart. Proceed to checkout.")
     return redirect('orders:cart')
@@ -93,6 +112,7 @@ def checkout(request):
         messages.info(request, 'Your cart is empty. Add items before checking out.')
         return redirect('orders:cart')
 
+    form = DeliveryForm()
     subtotal = sum(item.subtotal for item in cart_items)
     total = subtotal + DELIVERY_FEE
     return render(request, 'orders/checkout.html', {
@@ -100,6 +120,7 @@ def checkout(request):
         'subtotal': subtotal,
         'delivery_fee': DELIVERY_FEE,
         'total': total,
+        'form': form,
     })
 
 
@@ -121,25 +142,27 @@ def place_order(request):
     subtotal = sum(item.subtotal for item in cart_items)
     total = subtotal + DELIVERY_FEE
 
-    customer_name = request.POST.get('name', '').strip()
-    phone = request.POST.get('phone', '').strip()
-    address = request.POST.get('address', '').strip()
-    city = request.POST.get('city', '').strip()
-    pincode = request.POST.get('pincode', '').strip()
+    form = DeliveryForm(request.POST)
+    if not form.is_valid():
+        subtotal = sum(item.subtotal for item in cart_items)
+        return render(request, 'orders/checkout.html', {
+            'cart_items': cart_items,
+            'subtotal': subtotal,
+            'delivery_fee': DELIVERY_FEE,
+            'total': subtotal + DELIVERY_FEE,
+            'form': form,
+        })
 
-    if not all([customer_name, phone, address, city, pincode]):
-        messages.error(request, 'Please complete all delivery details before placing your order.')
-        return redirect('orders:checkout')
-
+    delivery = form.cleaned_data
     with transaction.atomic():
         order = Order.objects.create(
             user=request.user,
             order_number='TEMP',
-            customer_name=customer_name,
-            phone=phone,
-            address=address,
-            city=city,
-            pincode=pincode,
+            customer_name=delivery['name'],
+            phone=delivery['phone'],
+            address=delivery['address'],
+            city=delivery['city'],
+            pincode=delivery['pincode'],
             subtotal=subtotal,
             delivery_fee=DELIVERY_FEE,
             total=total,

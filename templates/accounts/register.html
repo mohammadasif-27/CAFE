@@ -36,14 +36,14 @@
 
 <div class="account-type">
 
-    <input type="radio" id="customer" name="account_type" value="customer" checked>
+    <input type="radio" id="customer" name="account_type" value="customer" {% if request.POST.account_type != "owner" %}checked{% endif %}>
     <label for="customer" class="account-card">
         <div class="icon">👤</div>
         <h4>Customer</h4>
         <p>Browse the menu and place orders.</p>
     </label>
 
-    <input type="radio" id="owner" name="account_type" value="owner">
+    <input type="radio" id="owner" name="account_type" value="owner" {% if request.POST.account_type == "owner" %}checked{% endif %}>
     <label for="owner" class="account-card">
         <div class="icon">☕</div>
         <h4>Staff Owner</h4>
@@ -51,15 +51,11 @@
     </label>
 
 </div>
-<div id="owner-box" style="display:none;">
+{{ form.account_type.errors }}
+<div id="owner-box" style="{% if request.POST.account_type == 'owner' %}display:block{% else %}display:none{% endif %};">
     <label>Owner Access Code</label>
     <input type="password" name="owner_code" placeholder="Enter 4-digit code">
 </div>
-<script>
-function selectAccount(type) {
-    document.getElementById("account_type").value = type;
-}
-</script>
         <div class="form-grid">
           <div class="form-group">
             {{ form.password1.label_tag }}

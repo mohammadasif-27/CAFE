@@ -11,30 +11,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxImage = document.querySelector('[data-lightbox-image]');
   const lightboxCaption = document.querySelector('[data-lightbox-caption]');
   const galleryItems = document.querySelectorAll('[data-gallery-item]');
-  const contactForm = document.querySelector('#contact-form');
-  const formFeedback = document.querySelector('[data-form-feedback]');
   const navbar = document.querySelector('.navbar');
 
-  const closeMobileNav = () => {
-    mobileNav.classList.remove('mobile-nav--open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  };
+  if (navToggle && mobileNav) {
+    const closeMobileNav = () => {
+      mobileNav.classList.remove('mobile-nav--open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    };
 
-  const openMobileNav = () => {
-    mobileNav.classList.add('mobile-nav--open');
-    navToggle.setAttribute('aria-expanded', 'true');
-  };
+    const openMobileNav = () => {
+      mobileNav.classList.add('mobile-nav--open');
+      navToggle.setAttribute('aria-expanded', 'true');
+    };
 
-  navToggle.addEventListener('click', () => {
-    const isOpen = mobileNav.classList.contains('mobile-nav--open');
-    if (isOpen) {
-      closeMobileNav();
-    } else {
-      openMobileNav();
-    }
-  });
+    navToggle.addEventListener('click', () => {
+      if (mobileNav.classList.contains('mobile-nav--open')) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    });
 
-  mobileNavLinks.forEach((link) => link.addEventListener('click', closeMobileNav));
+    mobileNavLinks.forEach((link) => link.addEventListener('click', closeMobileNav));
+  }
 
   navLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
@@ -52,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filterButtons.forEach((btn) => btn.classList.remove('filter-button--active'));
       button.classList.add('filter-button--active');
       menuCards.forEach((card) => {
-        const category = card.dataset.category;
+        const category = card.dataset.category.trim().toLowerCase().replace(/s$/, '');
         const matches = filter === 'all' || category === filter;
         card.style.display = matches ? 'grid' : 'none';
       });
@@ -107,8 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
       navbar.classList.remove('navbar--scrolled');
     }
   };
-  window.addEventListener('scroll', onScroll);
-  onScroll();
+  if (navbar) {
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+  }
 
   const openLightbox = (imageUrl, captionText) => {
     lightboxImage.src = imageUrl;
@@ -140,40 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
       closeLightbox();
     }
   });
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const name = contactForm.elements.name.value.trim();
-      const email = contactForm.elements.email.value.trim();
-      const phone = contactForm.elements.phone.value.trim();
-      const message = contactForm.elements.message.value.trim();
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const phonePattern = /^[0-9+\s-]{7,20}$/;
-      let error = '';
-
-      if (!name) {
-        error = 'Please enter your name.';
-      } else if (!email || !emailPattern.test(email)) {
-        error = 'Please enter a valid email address.';
-      } else if (!phone || !phonePattern.test(phone)) {
-        error = 'Please enter a valid phone number.';
-      } else if (!message) {
-        error = 'Please write a short message.';
-      }
-
-      if (error) {
-        formFeedback.textContent = error;
-        formFeedback.classList.remove('success');
-        formFeedback.classList.add('error');
-      } else {
-        formFeedback.textContent = 'Message ready to send! Thank you for reaching out.';
-        formFeedback.classList.remove('error');
-        formFeedback.classList.add('success');
-        contactForm.reset();
-      }
-    });
-  }
 
   // Password visibility toggle used on auth forms
   const passwordToggles = document.querySelectorAll('.password-toggle');

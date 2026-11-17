@@ -27,7 +27,7 @@
             Create a new menu item for your café.
         </p>
 
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
 
             {% csrf_token %}
 
@@ -35,12 +35,14 @@
 
                 <div class="input-box">
                     <label>Food Name</label>
-                    <input type="text" name="name" placeholder="Classic Burger" required>
+                    {{ form.name }}
+                    {{ form.name.errors }}
                 </div>
 
                 <div class="input-box">
                     <label>Price</label>
-                    <input type="number" step="0.01" name="price" placeholder="199" required>
+                    {{ form.price }}
+                    {{ form.price.errors }}
                 </div>
 
             </div>
@@ -51,25 +53,16 @@
 
                     <label>Category</label>
 
-                    <select name="category" required>
-                        <option value="Coffee">Coffee</option>
-                        <option value="Burger">Burger</option>
-                        <option value="Pizza">Pizza</option>
-                        <option value="Dessert">Dessert</option>
-                        <option value="Drinks">Drinks</option>
-                    </select>
+                    {{ form.category }}
+                    {{ form.category.errors }}
 
                 </div>
 
                 <div class="input-box">
 
-                    <label>Image Path</label>
-
-                    <input
-                        type="text"
-                        name="image"
-                        placeholder="images/burger.jpg"
-                    >
+                    <label for="{{ form.image.id_for_label }}">Food Image</label>
+                    {{ form.image }}
+                    {{ form.image.errors }}
 
                 </div>
 
@@ -79,11 +72,14 @@
 
                 <label>Description</label>
 
-                <textarea
-                    name="description"
-                    placeholder="Write food description..."
-                ></textarea>
+                {{ form.description }}
+                {{ form.description.errors }}
 
+            </div>
+
+            <div class="input-box">
+                <label for="{{ form.available.id_for_label }}">Available</label>
+                {{ form.available }}
             </div>
 
             <div class="button-area">
