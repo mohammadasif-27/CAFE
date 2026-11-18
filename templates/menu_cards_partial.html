@@ -6,9 +6,9 @@
 
       <div class="menu-card__image">
         {% if food.image %}
-          <img src="{{ food.image.url }}" alt="{{ food.name }}" loading="lazy">
+          <img src="{{ food.image.url }}" alt="{{ food.name }}" loading="lazy" onerror="this.onerror=null;this.src='{% static 'images/default-food.jpg' %}';">
         {% else %}
-          <img src="{% static 'images/default-food.svg' %}" alt="{{ food.name }}" loading="lazy">
+          <img src="{% static 'images/default-food.jpg' %}" alt="{{ food.name }}" loading="lazy" onerror="this.onerror=null;">
         {% endif %}
       </div>
 

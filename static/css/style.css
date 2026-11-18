@@ -1441,9 +1441,22 @@ footer p{
 .cart-item__image{
     width:150px;
     height:150px;
-    object-fit:cover;
+    position:relative;
+    overflow:hidden;
     border-radius:16px;
     transition:.35s;
+}
+
+.cart-item__image img,
+.checkout-item__image img,
+.order-success-item__image img{
+    position:absolute;
+    inset:0;
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:inherit;
 }
 
 .cart-item__image:hover{
@@ -1493,7 +1506,8 @@ footer p{
 .checkout-item__image{
     width:120px;
     height:120px;
-    object-fit:cover;
+    position:relative;
+    overflow:hidden;
     border-radius:15px;
 }
 
@@ -1504,8 +1518,9 @@ footer p{
 .order-success-item__image{
     width:220px;
     height:220px;
+    position:relative;
+    overflow:hidden;
     border-radius:20px;
-    object-fit:cover;
 }
 
 .order-success-item__details{

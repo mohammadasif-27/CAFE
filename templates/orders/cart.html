@@ -32,14 +32,16 @@
                                 src="{{ item.food.image.url }}"
                                 alt="{{ item.food.name }}"
                                 loading="lazy"
+                                onerror="this.onerror=null;this.src='{% static 'images/default-food.jpg' %}';"
                             >
 
                         {% else %}
 
                             <img
-                                src="{% static 'images/default-food.svg' %}"
+                                src="{% static 'images/default-food.jpg' %}"
                                 alt="{{ item.food.name }}"
                                 loading="lazy"
+                                onerror="this.onerror=null;"
                             >
 
                         {% endif %}

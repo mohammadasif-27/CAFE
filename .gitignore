@@ -3,4 +3,16 @@
 __pycache__/
 *.py[cod]
 db.sqlite3
-media/
+# Keep bundled menu photos while ignoring user uploads.
+media/*
+!media/foods/
+media/foods/*
+!media/foods/Almond_Croissant.jpg
+!media/foods/Cappuccino.jpg
+!media/foods/Chocolate_Cake.jpg
+!media/foods/Classic_Burger.jpg
+!media/foods/Espresso_Shot_rmDIWoZ.jpg
+!media/foods/Grilled_Sandwich.jpg
+!media/foods/Veggie_Pizza.jpg
+!media/foods/ginger-milk-tea_1.jpg
+!media/foods/pepperoni_cheese_pizza.jpg
