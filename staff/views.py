@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.db.models import ProtectedError, Sum
 from django.http import HttpResponseForbidden, HttpResponseNotAllowed
 from accounts.models import Profile
+from activity_tracking.analytics import get_analytics_summary
 from core.models import ContactMessage
 from menu.models import Food
 from orders.models import Order
@@ -44,6 +45,15 @@ def dashboard(request):
         "orders": Order.objects.select_related("user").all(),
         "contact_messages": ContactMessage.objects.all()[:50],
     })
+
+
+@staff_required
+def analytics(request):
+    return render(
+        request,
+        "activity_tracking/analytics.html",
+        get_analytics_summary(),
+    )
 
 
 @staff_required

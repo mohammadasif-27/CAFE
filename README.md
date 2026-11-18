@@ -14,6 +14,8 @@ CafeHub is a Django-powered web application for managing a cafe's online menu an
 * Contact form for customer enquiries
 * Owner dashboard inbox for saved contact messages
 * Upload food images and update item availability
+* Record pseudonymous customer visits, page and food views, cart actions, and orders
+* Provide an owner/staff-only customer analytics page
 * PostgreSQL database integration
 
 ## 🖥️ Tech Stack
@@ -36,6 +38,7 @@ CAFE/
 ├── menu/
 ├── orders/
 ├── staff/
+├── activity_tracking/
 ├── static/
 ├── templates/
 ├── media/
@@ -122,6 +125,9 @@ http://127.0.0.1:8000/
 
 * This project uses PostgreSQL.
 * Uploaded food images are stored in the local media directory during development.
+* Customer activity uses random session-scoped identifiers. It does not record passwords, IP addresses, or browser/device fingerprints.
+* Session duration is approximate and uses a visible-page heartbeat once per minute with a 30-minute inactivity cutoff.
+* Owner and staff can open Customer Analytics from the staff navigation. Text search is not currently part of the customer site, so search terms are not yet collected.
 * Contact form submissions are saved in the database and shown in the owner dashboard; no email is sent.
 * The Django development server is intended for local development, not production deployment.
 

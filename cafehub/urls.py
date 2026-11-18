@@ -19,6 +19,10 @@ urlpatterns = [
 
     path("orders/", include("orders.urls")),
 
+    path("menu/", include("menu.urls")),
+
+    path("activity/", include("activity_tracking.urls")),
+
     path("staff/", include("staff.urls")),
 ]
 

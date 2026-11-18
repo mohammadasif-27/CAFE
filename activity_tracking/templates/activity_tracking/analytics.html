@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Customer Analytics — CafeHub</title>
+    <link rel="stylesheet" href="/static/css/owner-dashboard.css">
+    <link rel="stylesheet" href="/static/css/owner-navbar.css">
+</head>
+<body>
+{% include "staff/owner_navbar.html" %}
+
+<main class="owner-dashboard">
+    <header class="owner-dashboard__header">
+        <div>
+            <p class="owner-dashboard__eyebrow">CAFEHUB MANAGEMENT</p>
+            <h1>Customer Analytics</h1>
+            <p class="owner-dashboard__intro">Activity and order summaries from existing CafeHub customer flows.</p>
+        </div>
+    </header>
+
+    <section class="owner-dashboard__stats" aria-label="Customer activity overview">
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Total Customers</span>
+            <strong>{{ total_customers }}</strong>
+        </article>
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Total Visits</span>
+            <strong>{{ total_visits }}</strong>
+        </article>
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Unique Visitors</span>
+            <strong>{{ total_visitors }}</strong>
+        </article>
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Returning Visitors</span>
+            <strong>{{ returning_visitors }}</strong>
+        </article>
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Total Orders</span>
+            <strong>{{ total_orders }}</strong>
+        </article>
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Repeat Customers</span>
+            <strong>{{ repeat_customers }}</strong>
+        </article>
+        <article class="owner-dashboard__stat owner-dashboard__stat--sales">
+            <span class="owner-dashboard__stat-label">Total Amount Spent</span>
+            <strong>₹{{ total_spent|floatformat:2 }}</strong>
+            <span class="owner-dashboard__stat-note">Average order: ₹{{ average_order_value|floatformat:2 }}</span>
+        </article>
+        <article class="owner-dashboard__stat">
+            <span class="owner-dashboard__stat-label">Recorded Session Time</span>
+            <strong>{{ total_session_seconds }}</strong>
+            <span class="owner-dashboard__stat-note">seconds (approximate)</span>
+        </article>
+    </section>
+
+    <section class="owner-dashboard__panel">
+        <div class="owner-dashboard__panel-heading"><div><h2>Most Viewed Foods</h2></div></div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead><tr><th scope="col">Food</th><th scope="col">Views</th></tr></thead>
+                <tbody>
+                    {% for item in most_viewed_foods %}
+                    <tr><td>{{ item.food__name }}</td><td>{{ item.views }}</td></tr>
+                    {% empty %}<tr><td class="owner-dashboard__empty" colspan="2">No food-detail views yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="owner-dashboard__panel">
+        <div class="owner-dashboard__panel-heading"><div><h2>Most Ordered Foods</h2></div></div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead><tr><th scope="col">Food</th><th scope="col">Quantity</th></tr></thead>
+                <tbody>
+                    {% for item in most_ordered_foods %}
+                    <tr><td>{{ item.food__name }}</td><td>{{ item.quantity }}</td></tr>
+                    {% empty %}<tr><td class="owner-dashboard__empty" colspan="2">No orders yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="owner-dashboard__panel">
+        <div class="owner-dashboard__panel-heading"><div><h2>Most Viewed Categories</h2></div></div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead><tr><th scope="col">Category</th><th scope="col">Views</th></tr></thead>
+                <tbody>
+                    {% for item in most_viewed_categories %}
+                    <tr><td>{{ item.food__category }}</td><td>{{ item.views }}</td></tr>
+                    {% empty %}<tr><td class="owner-dashboard__empty" colspan="2">No category views yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="owner-dashboard__panel">
+        <div class="owner-dashboard__panel-heading"><div><h2>Most Searched Foods</h2></div></div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead><tr><th scope="col">Search</th><th scope="col">Searches</th></tr></thead>
+                <tbody>
+                    {% for item in most_searched_foods %}
+                    <tr><td>{{ item.search_query }}</td><td>{{ item.searches }}</td></tr>
+                    {% empty %}<tr><td class="owner-dashboard__empty" colspan="2">Search tracking is unavailable because the current site has no food-search feature.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="owner-dashboard__panel">
+        <div class="owner-dashboard__panel-heading"><div><h2>Most Active Customers</h2></div></div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead><tr><th scope="col">Customer</th><th scope="col">Recorded Activities</th></tr></thead>
+                <tbody>
+                    {% for item in most_active_customers %}
+                    <tr><td>{{ item.user__username }}</td><td>{{ item.activity_count }}</td></tr>
+                    {% empty %}<tr><td class="owner-dashboard__empty" colspan="2">No customer activity yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="owner-dashboard__panel">
+        <div class="owner-dashboard__panel-heading"><div><h2>Customer Visits</h2></div></div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead><tr><th scope="col">Customer</th><th scope="col">Visits</th><th scope="col">First Visit</th><th scope="col">Last Visit</th><th scope="col">Session Seconds</th></tr></thead>
+                <tbody>
+                    {% for item in customer_visit_stats %}
+                    <tr><td>{{ item.user__username }}</td><td>{{ item.visit_count }}</td><td>{{ item.first_visit|date:"M j, Y H:i" }}</td><td>{{ item.last_visit|date:"M j, Y H:i" }}</td><td>{{ item.total_session_seconds }}</td></tr>
+                    {% empty %}<tr><td class="owner-dashboard__empty" colspan="5">No logged-in customer visits yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="owner-dashboard__panel">
+        <div class="owner-dashboard__panel-heading"><div><h2>Customer Orders</h2></div></div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead><tr><th scope="col">Customer</th><th scope="col">Orders</th><th scope="col">Total Spent</th><th scope="col">Average Order</th><th scope="col">Last Order</th></tr></thead>
+                <tbody>
+                    {% for item in customer_order_stats %}
+                    <tr><td>{{ item.user__username }}</td><td>{{ item.order_count }}</td><td>₹{{ item.total_spent|floatformat:2 }}</td><td>₹{{ item.average_order_value|floatformat:2 }}</td><td>{{ item.last_order|date:"M j, Y H:i" }}</td></tr>
+                    {% empty %}<tr><td class="owner-dashboard__empty" colspan="5">No customer orders yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="owner-dashboard__panel">
+        <div class="owner-dashboard__panel-heading"><div><h2>Customers Without Recent Orders</h2><p>No orders in the last 30 days.</p></div></div>
+        <div class="owner-dashboard__table-wrap">
+            <table class="owner-dashboard__table">
+                <thead><tr><th scope="col">Customer</th></tr></thead>
+                <tbody>
+                    {% for profile in customers_without_recent_orders %}
+                    <tr><td>{{ profile.user.username }}</td></tr>
+                    {% empty %}<tr><td class="owner-dashboard__empty">No customers in this group.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

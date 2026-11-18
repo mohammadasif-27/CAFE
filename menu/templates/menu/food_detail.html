@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ food.name }} — CafeHub{% endblock %}
+
+{% block content %}
+
+\<section class="section">
+
+&#x20; \<div class="section-heading">
+&#x20;   \<p class="section-small">{{ food.category }}\</p>
+&#x20;   \<h1>{{ food.name }}\</h1>
+&#x20;   \<p>{{ food.description }}\</p>
+&#x20; \</div>
+
+&#x20; \<div class="menu-card" style="max-width:640px;margin:0 auto;">
+
+```
+<div class="menu-card__image">
+  {% if food.image %}
+    <img
+      src="{{ food.image.url }}"
+      alt="{{ food.name }}"
+      onerror="this.onerror=null; this.src='{% static "images/default-food.jpg" %}';"
+    >
+  {% else %}
+    <img
+      src="{% static 'images/default-food.jpg' %}"
+      alt="{{ food.name }}"
+    >
+  {% endif %}
+</div>
+
+<div class="menu-card__footer">
+
+  <span class="menu-card__price">
+    ₹{{ food.price }}
+  </span>
+
+  <div class="menu-card__actions">
+
+    <form method="post" action="{% url 'orders:add_to_cart' food.id %}">
+      {% csrf_token %}
+      <button class="btn add-to-cart" type="submit">
+        Add to Cart
+      </button>
+    </form>
+
+    <form method="post" action="{% url 'orders:order_now' food.id %}">
+      {% csrf_token %}
+      <button class="btn btn-secondary" type="submit">
+        Order Now
+      </button>
+    </form>
+
+  </div>
+</div>
+```
+
+&#x20; \</div>
+
+&#x20; \<p style="text-align\:center;margin-top:24px;">     \<a class="btn btn-secondary" href="{% url 'home' %}#menu">       Back to Menu     \</a>   \</p>
+
+\</section>
+{% endblock %}

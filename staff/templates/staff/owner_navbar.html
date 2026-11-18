@@ -9,6 +9,7 @@
         <a href="{% url 'add_food' %}">Add Food</a>
         <a href="{% url 'dashboard' %}#orders">Orders</a>
         <a href="{% url 'dashboard' %}#contact-messages">Messages</a>
+        <a href="{% url 'analytics' %}">Analytics</a>
         <form method="post" action="{% url 'accounts:logout' %}">
             {% csrf_token %}
             <button class="owner-navbar__logout" type="submit">Logout</button>

@@ -414,6 +414,65 @@
 
   <script src="{% static 'js/main.js' %}" defer></script>
 
+  <form hidden id="activity-csrf-form">{% csrf_token %}</form>
+  <script>
+    (function () {
+      var tokenInput = document.querySelector('#activity-csrf-form input[name="csrfmiddlewaretoken"]');
+      if (!tokenInput) return;
+
+      var csrfToken = tokenInput.value;
+      var heartbeatUrl = "{% url 'activity_tracking:heartbeat' %}";
+      var eventUrl = "{% url 'activity_tracking:event' %}";
+
+      function sendHeartbeat(force) {
+        if (!force && document.visibilityState !== 'visible') return;
+        fetch(heartbeatUrl, {
+          method: 'POST',
+          credentials: 'same-origin',
+          keepalive: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken
+          },
+          body: 'csrfmiddlewaretoken=' + encodeURIComponent(csrfToken)
+        });
+      }
+
+      function recordPage(page) {
+        fetch(eventUrl, {
+          method: 'POST',
+          credentials: 'same-origin',
+          keepalive: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken
+          },
+          body: 'csrfmiddlewaretoken=' + encodeURIComponent(csrfToken) +
+            '&type=page_view&page=' + encodeURIComponent(page)
+        });
+      }
+
+      window.setInterval(sendHeartbeat, 60000);
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'hidden') {
+          var body = new URLSearchParams({csrfmiddlewaretoken: csrfToken});
+          if (navigator.sendBeacon) {
+            navigator.sendBeacon(heartbeatUrl, body);
+          } else {
+            sendHeartbeat(true);
+          }
+        }
+      });
+
+      document.querySelectorAll('a[href*="#menu"], a[href*="#contact"]').forEach(function (link) {
+        link.addEventListener('click', function () {
+          var target = link.href.indexOf('#contact') !== -1 ? 'Contact' : 'Menu';
+          if (document.getElementById(target.toLowerCase())) recordPage(target);
+        });
+      });
+    })();
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   {% if messages %}

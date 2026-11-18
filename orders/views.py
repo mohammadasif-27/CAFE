@@ -7,6 +7,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
 
+from activity_tracking.models import CustomerActivity
+from activity_tracking.services import record_activity
 from menu.models import Food
 from .forms import DeliveryForm
 from .models import CartItem, Order, OrderItem
@@ -43,7 +45,7 @@ def add_to_cart(request, food_id):
         messages.info(request, "Sign in to add this item; it will be added after you log in.")
         return redirect('accounts:login')
 
-    add_food_to_cart(request.user, food)
+    add_food_to_cart(request.user, food, request=request)
 
     messages.success(request, f"Added {food.name} to your cart.")
     return redirect(_safe_referer(request))
@@ -62,7 +64,7 @@ def order_now(request, food_id):
         messages.info(request, "Sign in to order this item; it will be added after you log in.")
         return redirect('accounts:login')
 
-    add_food_to_cart(request.user, food)
+    add_food_to_cart(request.user, food, request=request)
 
     messages.success(request, f"{food.name} is now in your cart. Proceed to checkout.")
     return redirect('orders:cart')
@@ -96,10 +98,24 @@ def update_cart_item(request, item_id):
             cart_item.save()
             messages.success(request, f"Decreased quantity for {cart_item.food.name}.")
         else:
-            cart_item.delete()
+            with transaction.atomic():
+                cart_item.delete()
+                record_activity(
+                    request,
+                    CustomerActivity.CART_REMOVE,
+                    page='Cart',
+                    food=cart_item.food,
+                )
             messages.success(request, f"Removed {cart_item.food.name} from your cart.")
     elif action == 'remove':
-        cart_item.delete()
+        with transaction.atomic():
+            cart_item.delete()
+            record_activity(
+                request,
+                CustomerActivity.CART_REMOVE,
+                page='Cart',
+                food=cart_item.food,
+            )
         messages.success(request, f"Removed {cart_item.food.name} from your cart.")
 
     return redirect('orders:cart')
@@ -180,6 +196,12 @@ def place_order(request):
                 subtotal=item.subtotal,
             ))
         OrderItem.objects.bulk_create(order_items)
+        record_activity(
+            request,
+            CustomerActivity.ORDER_PLACED,
+            page='Orders',
+            order=order,
+        )
         cart_items.delete()
 
     messages.success(request, f"Your order {order.order_number} has been placed successfully.")

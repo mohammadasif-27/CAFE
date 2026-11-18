@@ -5,17 +5,19 @@
     <article class="menu-card animate-on-scroll" data-category="{{ food.category|lower }}">
 
       <div class="menu-card__image">
-        {% if food.image %}
-          <img src="{{ food.image.url }}" alt="{{ food.name }}" loading="lazy" onerror="this.onerror=null;this.src='{% static 'images/default-food.jpg' %}';">
-        {% else %}
-          <img src="{% static 'images/default-food.jpg' %}" alt="{{ food.name }}" loading="lazy" onerror="this.onerror=null;">
-        {% endif %}
+        <a href="{% url 'menu:food_detail' food.id %}" aria-label="View {{ food.name }} details">
+          {% if food.image %}
+            <img src="{{ food.image.url }}" alt="{{ food.name }}" loading="lazy" onerror="this.onerror=null;this.src='{% static 'images/default-food.jpg' %}';">
+          {% else %}
+            <img src="{% static 'images/default-food.jpg' %}" alt="{{ food.name }}" loading="lazy" onerror="this.onerror=null;">
+          {% endif %}
+        </a>
       </div>
 
       <div class="menu-card__body">
         <!-- <span class="menu-card__tag">{{ food.category }}</span> -->
 
-        <h3 class="menu-card__title">{{ food.name }}</h3>
+        <h3 class="menu-card__title"><a href="{% url 'menu:food_detail' food.id %}">{{ food.name }}</a></h3>
 
         <p class="menu-card__text">{{ food.description }}</p>
       </div>

@@ -1,7 +1,10 @@
 from django.contrib import messages
+from django.db import transaction
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from accounts.models import Profile
+from activity_tracking.models import CustomerActivity
+from activity_tracking.services import record_activity
 from menu.models import Food
 from .forms import ContactForm, ReviewForm
 from .models import ContactMessage, Review
@@ -19,7 +22,13 @@ def home(request):
 
     contact_form = ContactForm(request.POST if request.method == "POST" else None)
     if request.method == "POST" and contact_form.is_valid():
-        ContactMessage.objects.create(**contact_form.cleaned_data)
+        with transaction.atomic():
+            ContactMessage.objects.create(**contact_form.cleaned_data)
+            record_activity(
+                request,
+                CustomerActivity.CONTACT,
+                page='Contact',
+            )
         messages.success(request, "Your message has been sent to CafeHub.")
         return redirect(f"{reverse('home')}#contact")
 

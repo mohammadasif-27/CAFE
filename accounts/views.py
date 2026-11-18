@@ -95,7 +95,7 @@ def login_view(request):
                     messages.error(request, "That menu item is no longer available.")
                     return redirect('home')
                 else:
-                    add_food_to_cart(user, food)
+                    add_food_to_cart(user, food, request=request)
                     messages.success(request, f"Added {food.name} to your cart.")
                     return redirect('orders:cart')
 
